@@ -1,0 +1,61 @@
+<div id="abrir-novo-periodo-avaliacao">
+    <b-button variant="primary" v-b-modal.modal-abrir-novo-periodo-avaliacao>Abrir novo período de avaliação</b-button>
+    <b-modal 
+        id="modal-abrir-novo-periodo-avaliacao" 
+        title="Abrir novo período de avaliação"
+        hide-footer
+        size="lg">
+        
+        <b-form @submit="abrirPeriodoAvaliacao">
+            <b-form-group
+                id="input-group-sprint"
+                label="Sprint"
+                label-for="input-sprint">
+                <b-form-input
+                    id="input-sprint"
+                    v-model="form.sprint"
+                    type="number"
+                    placeholder="Informe para qual sprint este período será destinado"
+                    min="1"/>
+            </b-form-group>
+
+            <b-form-group
+                id="input-group-projeto"
+                label="Data de início"
+                label-for="input-projeto">
+                <b-form-select
+                    id="input-projeto"
+                    v-model="form.projeto"
+                    :options="projetos"/>
+            </b-form-group>
+            
+            <b-form-group
+                id="input-group-data-inicio"
+                label="Data de início"
+                label-for="input-data-inicio">
+                <b-form-datepicker 
+                    id="input-data-inicio" 
+                    v-model="form.inicio" 
+                    placeholder="Selecione a data de início" 
+                    locale="pt-br"/>
+            </b-form-group>
+            
+            <b-form-group
+                id="input-group-data-termino"
+                label="Data de termino"
+                label-for="input-data-termino">
+                <b-form-datepicker 
+                    id="input-data-termino" 
+                    v-model="form.termino" 
+                    placeholder="Selecione a data de término" 
+                    locale="pt-br"/>
+            </b-form-group>
+            
+            <b-alert v-model="mostrarAlerta" variant="danger">
+                {{mensagemAlerta}}
+            </b-alert>
+
+            <b-button variant="success" type="submit">Abrir</b-button>
+        </b-form>
+    </b-modal>
+</div>
