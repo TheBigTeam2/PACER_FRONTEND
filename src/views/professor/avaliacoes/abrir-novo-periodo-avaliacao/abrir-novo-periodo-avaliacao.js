@@ -1,4 +1,12 @@
+import axios from 'axios'
+import api from '../../../../plugins/api'
+
 export default {
+    props: {
+        projetos: {
+            require: true
+        }
+    },
     data: () => ({
         form: {
             sprint: null,
@@ -6,11 +14,6 @@ export default {
             inicio: null,
             termino: null
         },
-        projetos: [
-            { text: '-- Selecione a qual projeto este perído será destinado --', value: null, disabled: true },
-            { text: 'Projeto 1', value: '123' },
-            { text: 'Projeto 2', value: '456' }
-        ],
         mostrarAlerta: false,
         mensagemAlerta: ''
     }),
@@ -29,6 +32,29 @@ export default {
                 this.mensagemAlerta = 'Todos os campos devem ser preenchidos!'
             } else {
                 this.mostrarAlerta = false
+                this.$swal.fire({
+                    title: 'Abrindo novo período de avaliação, aguarde...'
+                })
+                this.$swal.showLoading()
+                api.professor.abrirAvaliacao(this.form)
+                    .then(res => {
+                        this.$swal.fire({
+                            title: 'Sucesso!',
+                            text: 'Novas avaliações foram enviadas às equipes. Você poderá acompanhar seu progresso na página de avaliações.',
+                            icon: 'success'
+                        })
+                        this.$emit('avaliacoesEnviadas')
+                        this.reiniciarFormulario()
+                    })
+            }
+        },
+
+        reiniciarFormulario() {
+            this.form = {
+                sprint: null,
+                projeto: null,
+                inicio: null,
+                termino: null
             }
         }
     }

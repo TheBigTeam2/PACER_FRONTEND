@@ -19,6 +19,14 @@ require('admin-lte/plugins/fontawesome-free/css/all.min.css')
 require('admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')
 require('admin-lte/dist/css/adminlte.min.css')
 
+// SweetAlert
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
+
+// Moment
+Vue.use(require('vue-moment'));
+
 Vue.config.productionTip = false
 
 new Vue({

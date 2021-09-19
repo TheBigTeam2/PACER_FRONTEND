@@ -3,28 +3,27 @@
         <h1>Avaliações</h1>
     </div>
     <div class="content py-3">
-        <b-row>
-            <b-col>
-                <app-abrir-novo-periodo-avaliacao :projetos="projetos" @avaliacoesEnviadas="buscarProjetos"/>
-            </b-col>
-        </b-row>
         <b-row class="py-3">
             <b-col>
-                <div class="accordion" role="tablist" v-for="projeto in projetosAvaliacao" :key="'Projeto ' + projeto.id">
+                <div class="accordion" role="tablist" v-for="projeto in projetos">
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                             <b-button block v-b-toggle="'Projeto-' + projeto.id" variant="info">Projeto {{ projeto.id }}</b-button>
                         </b-card-header>
                         <b-collapse :id="'Projeto-' + projeto.id" accordion="accordion-projeto" role="tabpanel">
                             <b-card-body>
-                                <div class="accordion" role="tablist" v-for="(dados, equipe) in projeto.avaliacoes" :key="'Equipe ' + equipe">
+                                <div class="accordion" role="tablist" v-for="(avaliacoes, sprint) in projeto.avaliacoes">
                                     <b-card no-body class="mb-1">
                                         <b-card-header header-tag="header" class="p-1" role="tab">
-                                            <b-button block v-b-toggle="'Equipe-' + equipe + '-' + projeto.id" variant="info">Equipe {{ equipe }}</b-button>
+                                            <b-button block v-b-toggle="'Sprint-' + sprint + '-' + projeto.id" variant="info">Sprint {{ sprint }}</b-button>
                                         </b-card-header>
-                                        <b-collapse :id="'Equipe-' + equipe + '-' + projeto.id" accordion="accordion-equipe" role="tabpanel">
+                                        <b-collapse :id="'Sprint-' + sprint + '-' + projeto.id" accordion="accordion-sprint" role="tabpanel">
                                             <b-card-body>
-                                                <pre>{{dados}}</pre>
+                                                <b-list-group>
+                                                    <b-list-group-item v-for="avaliacao in avaliacoes" button @click="avaliar(avaliacao)" title="Fazer avaliação">
+                                                        {{ avaliacao.avaliado == idAluno ? 'Autoavaliação' : 'Avaliar o aluno ' + avaliacao.avaliado }}
+                                                    </b-list-group-item>
+                                                </b-list-group>
                                             </b-card-body>
                                         </b-collapse>
                                     </b-card>
@@ -36,4 +35,5 @@
             </b-col>
         </b-row>
     </div>
+    <app-atribuir-nota :avaliacao="avaliacaoSelecionada" @removerSelecao="removerSelecao" @avaliacaoEnviada="avaliacaoEnviada"/>
 </div>

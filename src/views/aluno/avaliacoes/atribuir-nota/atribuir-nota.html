@@ -1,0 +1,26 @@
+<b-modal id="modal-atribuir-nota" :title="'Avalie o(a) aluno(a) ' + avaliacao.avaliado" :visible="avaliacao != null" v-if="avaliacao" @hidden="removerSelecao" size="lg" hide-footer>
+    <form @submit="avaliarAluno">
+        <b-row>
+            <b-col cols="6" v-for="campo in form">
+                <b-form-group
+                    :id="'input-group-' + campo.criterio"
+                    :label="campo.criterio"
+                    :label-for="'input-' + campo.criterio">
+                    <b-form-input
+                        :id="'input-' + campo.criterio"
+                        v-model="campo.valor"
+                        type="number"
+                        :placeholder="'Dê a nota para ' + campo.criterio"
+                        required
+                        min="0"
+                        max="3"/>
+                </b-form-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col cols="12">
+                <b-button block type="submit" variant="success">Avaliar</b-button>
+            </b-col>
+        </b-row>
+    </form>
+</b-modal>
