@@ -47,7 +47,7 @@ export default {
                     this.$swal.fire({
                         title: 'Sucesso!',
                         text: 'Sua avaliação foi enviada com sucesso.',
-                        text: 'success'
+                        icon: 'success'
                     })
                     this.$emit('avaliacaoEnviada')
                 })

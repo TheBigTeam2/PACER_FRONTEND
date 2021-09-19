@@ -26,7 +26,6 @@ export default {
             api.professor.buscarProjetos()
                 .then(res => res.data)
                 .then(data => {
-                    console.log(data)
                     data.forEach(projeto => {
                         // Adicionando o projeto na listagem para abertura de avaliações
                         this.projetos.push({
@@ -41,9 +40,13 @@ export default {
         },
         organizarAvaliacoes (projeto) {
             const that = this
+            this.projetosAvaliacao = []
             this.projetosAvaliacao.push((function () {
-                projeto.avaliacoes = that.groupBy(projeto.avaliacoes, 'equipe')
-                
+                projeto.avaliacoes = that.groupBy(projeto.avaliacoes, 'sprint')
+                const keys = Object.keys(projeto.avaliacoes)
+                keys.forEach(key => {
+                    projeto.avaliacoes[key] = that.groupBy(projeto.avaliacoes[key], 'avaliador')
+                })
                 return projeto
             }()))
         },

@@ -13,18 +13,45 @@
                 <div class="accordion" role="tablist" v-for="projeto in projetosAvaliacao" :key="'Projeto ' + projeto.id">
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
-                            <b-button block v-b-toggle="'Projeto-' + projeto.id" variant="info">Projeto {{ projeto.id }}</b-button>
+                            <b-button block v-b-toggle="'Projeto-' + projeto.id" variant="info">Projeto: {{ projeto.id }}</b-button>
                         </b-card-header>
                         <b-collapse :id="'Projeto-' + projeto.id" accordion="accordion-projeto" role="tabpanel">
                             <b-card-body>
-                                <div class="accordion" role="tablist" v-for="(dados, equipe) in projeto.avaliacoes" :key="'Equipe ' + equipe">
+                                <div class="accordion" role="tablist" v-for="(dados, sprint) in projeto.avaliacoes" :key="'Sprint-' + sprint + '-' + projeto.id">
                                     <b-card no-body class="mb-1">
                                         <b-card-header header-tag="header" class="p-1" role="tab">
-                                            <b-button block v-b-toggle="'Equipe-' + equipe + '-' + projeto.id" variant="info">Equipe {{ equipe }}</b-button>
+                                            <b-button block v-b-toggle="'Sprint-' + sprint + '-' + projeto.id" variant="info">Sprint: {{ sprint }}</b-button>
                                         </b-card-header>
-                                        <b-collapse :id="'Equipe-' + equipe + '-' + projeto.id" accordion="accordion-equipe" role="tabpanel">
+                                        <b-collapse :id="'Sprint-' + sprint + '-' + projeto.id" accordion="accordion-sprint" role="tabpanel">
                                             <b-card-body>
-                                                <pre>{{dados}}</pre>
+                                                <div class="accordion" role="tablist" v-for="(avaliacoes, avaliador) in dados" :key="'Avaliador-' + avaliador + '-' + sprint + '-' + projeto.id">
+                                                    <b-card no-body class="mb-1">
+                                                        <b-card-header header-tag="header" class="p-1" role="tab">
+                                                            <b-button block v-b-toggle="'Avaliador-' + avaliador + '-' + sprint + '-' + projeto.id" variant="info">Aluno avaliador: {{ avaliador }}</b-button>
+                                                        </b-card-header>
+                                                        <b-collapse :id="'Avaliador-' + avaliador + '-' + sprint + '-' + projeto.id" accordion="accordion-avaliador" role="tabpanel">
+                                                            <b-card-body>
+                                                                <div class="accordion" role="tablist" v-for="avaliacao in avaliacoes" :key="'Avaliacao-' + avaliacao.id + '-' + avaliador + '-' + sprint + '-' + projeto.id">
+                                                                    <b-card no-body class="mb-1">
+                                                                        <b-card-header header-tag="header" class="p-1" role="tab">
+                                                                            <b-button block v-b-toggle="'Avaliacao-' + avaliacao.id + '-' + avaliador + '-' + sprint + '-' + projeto.id" variant="info">Aluno avaliado: {{ avaliacao.avaliado }}</b-button>
+                                                                        </b-card-header>
+                                                                        <b-collapse :id="'Avaliacao-' + avaliacao.id + '-' + avaliador + '-' + sprint + '-' + projeto.id" accordion="accordion-avaliado" role="tabpanel">
+                                                                            <b-card-body>
+                                                                                <b-list-group v-if="avaliacao.notas.length == 0">
+                                                                                    <b-list-group-item>Avaliação ainda não foi feita.</b-list-group-item>
+                                                                                </b-list-group>
+                                                                                <b-list-group v-else>
+                                                                                    <b-list-group-item v-for="nota in avaliacao.notas">{{ nota.criterio }}: {{ nota.valor }}</b-list-group-item>
+                                                                                </b-list-group>                                            
+                                                                            </b-card-body>
+                                                                        </b-collapse>
+                                                                    </b-card>
+                                                                </div>
+                                                            </b-card-body>
+                                                        </b-collapse>
+                                                    </b-card>
+                                                </div>
                                             </b-card-body>
                                         </b-collapse>
                                     </b-card>

@@ -15,10 +15,10 @@ export default {
     },
     methods: {
         buscarProjetos () {
-            this.projetos = []
             api.professor.buscarProjetos()
                 .then(res => res.data)
                 .then(data => {
+                    this.projetos = []
                     data.forEach(projeto => {
                         projeto.avaliacoes = projeto.avaliacoes.filter(avaliacao => avaliacao.avaliador == this.idAluno && avaliacao.notas.length == 0)
                         projeto.avaliacoes = this.groupBy(projeto.avaliacoes, 'sprint')
