@@ -4,6 +4,7 @@ import Professor from '../views/professor/professor.vue'
 import Avaliacoes from '../views/professor/avaliacoes/avaliacoes.vue'
 import Aluno from '../views/aluno/aluno.vue'
 import AvaliacoesAluno from '../views/aluno/avaliacoes/avaliacoes.vue'
+import Admin from '../views/admin/admin.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,18 @@ const routes = [
         component: AvaliacoesAluno
       }
     ]
+  },
+  {
+    path: '/admin',
+    name: 'Administrador',
+    component: Admin,
+    children: [
+      // {
+      //   path: '/usuario',
+      //   name: 'Usuário',
+      //   component: Usuario
+      // }
+  ]
   }
 ]
 
