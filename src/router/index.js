@@ -5,6 +5,7 @@ import Avaliacoes from '../views/professor/avaliacoes/avaliacoes.vue'
 import Aluno from '../views/aluno/aluno.vue'
 import AvaliacoesAluno from '../views/aluno/avaliacoes/avaliacoes.vue'
 import Admin from '../views/admin/admin.vue'
+import Usuario from '../views/admin/usuario/usuario.vue'
 
 Vue.use(VueRouter)
 
@@ -46,11 +47,11 @@ const routes = [
     name: 'Administrador',
     component: Admin,
     children: [
-      // {
-      //   path: '/usuario',
-      //   name: 'Usuário',
-      //   component: Usuario
-      // }
+      {
+        path: '/usuario',
+        name: 'Usuário',
+        component: Usuario
+      }
   ]
   }
 ]
