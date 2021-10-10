@@ -1,5 +1,5 @@
 import AdicionarEquipe from './adicionar-equipe/adicionar-equipe.vue'
-import BoxEquipe from '../../../components/boxEquipe/boxEquipe.vue'
+import BoxEquipe from '../../../components/box-equipe/box-equipe.vue'
 import ProfessorService from '../../../services/professor.service'
 
 export default {

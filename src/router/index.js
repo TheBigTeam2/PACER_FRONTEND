@@ -54,8 +54,8 @@ const routes = [
     component: Admin,
     children: [
       {
-        path: '/usuario',
-        name: 'Usuário',
+        path: '/admin/usuario',
+        name: 'Administrador Usuários',
         component: Usuario
       }
   ]

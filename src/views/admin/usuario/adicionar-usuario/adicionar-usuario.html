@@ -1,0 +1,62 @@
+<div id="adicionar-usuario">
+    <b-button variant="primary" v-b-modal.modal-adicionar-usuario>Adicionar Usuário</b-button>
+    <b-modal 
+        id="modal-adicionar-usuario" 
+        title="Adicionar Usuário"
+        hide-footer
+        size="lg">
+        
+        <b-form @submit="adicionarUsuario">
+            <b-form-group
+                id="input-group-nome"
+                label="Qual o nome do usuário?"
+                label-for="input-nome">
+                <b-form-input
+                    id="input-nome"
+                    v-model="form.nome"
+                    type="text"
+                    placeholder="Informe o nome do usuário"
+                    required/>
+            </b-form-group>
+
+            <b-form-group
+                id="input-group-rg"
+                label="Qual o RG do usuário?"
+                label-for="input-rg">
+                <input
+                    class="form-control"
+                    id="input-rg"
+                    v-model="form.rg"
+                    type="text"
+                    placeholder="Informe o rg do usuário"
+                    v-mask="'##.###.###-N'"
+                    required
+                    @input="formatarRG">
+            </b-form-group>
+
+            <b-form-group
+                id="input-group-cpf"
+                label="Qual o CPF do usuário?"
+                label-for="input-cpf">
+                <input
+                    class="form-control"
+                    id="input-cpf"
+                    v-model="form.cpf"
+                    type="text"
+                    placeholder="Informe o cpf do usuário"
+                    v-mask="'###.###.###-##'"
+                    required>
+            </b-form-group>
+
+            <b-form-group 
+                label="Esse usuário seria..."
+                label-for="radio-aluno">
+                <b-form-radio v-model="form.auth" id="radio-aluno" name="auth" value="Aluno">Aluno</b-form-radio>
+                <b-form-radio v-model="form.auth" id="radio-professor" name="auth" value="Professor">Professor</b-form-radio>
+                <b-form-radio v-model="form.auth" id="radio-administrador" name="auth" value="Administrador">Administrador</b-form-radio>
+            </b-form-group>
+
+            <b-button variant="success" type="submit">Adicionar</b-button>
+        </b-form>
+    </b-modal>
+</div>
