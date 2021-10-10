@@ -14,6 +14,10 @@ class ProfessorService {
   adicionarEquipe (dados) {
     return api.post('/equipe', dados)
   }
+
+  buscarEquipes () {
+    return api.get('/equipes')
+  }
 }
 
 export default new ProfessorService()

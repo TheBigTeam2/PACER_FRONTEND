@@ -27,6 +27,7 @@ export default {
                         icon: 'success'
                     })
                     this.reiniciarForm()
+                    this.$emit('equipeAdicionada')
                 })
         },
         reiniciarForm () {
