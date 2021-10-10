@@ -10,6 +10,10 @@ class ProfessorService {
   abrirAvaliacao (dados) {
     return api.post(`/professor/${idProfessor}/avaliacao`, dados)
   }
+
+  adicionarEquipe (dados) {
+    return api.post('/equipe', dados)
+  }
 }
 
 export default new ProfessorService()

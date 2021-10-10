@@ -6,6 +6,7 @@ import Aluno from '../views/aluno/aluno.vue'
 import AvaliacoesAluno from '../views/aluno/avaliacoes/avaliacoes.vue'
 import Admin from '../views/admin/admin.vue'
 import Usuario from '../views/admin/usuario/usuario.vue'
+import Equipes from '../views/professor/equipes/equipes.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
         path: '/professor/avaliacoes',
         name: 'Professor Avaliacoes',
         component: Avaliacoes
+      },
+      {
+        path: '/professor/equipes',
+        name: 'Professor Equipes',
+        component: Equipes
       }
     ]
   },
