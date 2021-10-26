@@ -33,7 +33,7 @@ export default {
           const wsname = wb.SheetNames[0]
           const ws = wb.Sheets[wsname]
           const data = XLSX.utils.sheet_to_json(ws, { header: 1 })
-
+          const linhas = []
           if (data != null && data.length > 0) {
             const titulos = data[0]
             for (let i = 1; i < data.length; i++) {
@@ -43,9 +43,10 @@ export default {
                 const valor = linha[j]
                 registro[titulos[j]] = valor
               }
-              this.linhas.push(registro)
+              linhas.push(registro)
             }
             setTimeout(() => {
+              this.linhas = linhas
               this.$swal.fire({
                 title: 'Sucesso!',
                 text: 'Arquivo lido com sucesso.',
