@@ -1,15 +1,17 @@
+
 import XLSX from 'xlsx'
 
 export default {
+  props: ['titulo'],
   data: () => ({
     arquivo: null,
-    usuarios: [],
+    linhas: [],
     pagina: 1,
     qtdRegistros: 5
   }),
   computed: {
     rows () {
-      return this.usuarios.length
+      return this.linhas.length
     }
   },
   methods: {
@@ -17,8 +19,13 @@ export default {
       event.preventDefault()
 
       if (this.arquivo) {
-        this.usuarios = []
+        this.linhas = []
         const reader = new FileReader()
+
+        this.$swal.fire({
+          title: 'Lendo o arquivo, aguarde...'
+        })
+        this.$swal.showLoading()
 
         reader.onload = (e) => {
           const bstr = e.target.result
@@ -27,31 +34,39 @@ export default {
           const ws = wb.Sheets[wsname]
           const data = XLSX.utils.sheet_to_json(ws, { header: 1 })
 
-          if (data != null) {
-            const chaves = data[0]
-
+          if (data != null && data.length > 0) {
+            const titulos = data[0]
             for (let i = 1; i < data.length; i++) {
               const linha = data[i]
-              const usuario = {}
+              const registro = {}
               for (let j = 0; j < linha.length; j++) {
                 const valor = linha[j]
-                usuario[chaves[j]] = valor
+                registro[titulos[j]] = valor
               }
-              this.usuarios.push(usuario)
+              this.linhas.push(registro)
             }
+            setTimeout(() => {
+              this.$swal.fire({
+                title: 'Sucesso!',
+                text: 'Arquivo lido com sucesso.',
+                icon: 'success'
+              })
+            }, 1000)
           }
         }
 
         reader.readAsBinaryString(this.arquivo)
       }
     },
-    importarUsuarios () {
-      if (this.usuarios != null && this.usuarios.length > 0) {
-        alert('Import')
+    importar (event) {
+      event.preventDefault()
+      if (this.linhas != null && this.linhas.length > 0) {
+        this.$emit('onImport', this.linhas)
+        this.$bvModal.hide('modal-import-modal')
       }
     },
     limparArquivo () {
-      this.usuarios = []
+      this.linhas = []
       this.arquivo = null
     }
   }

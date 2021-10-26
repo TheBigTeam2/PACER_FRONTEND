@@ -1,7 +1,7 @@
 import AdminService from '../../../services/admin.service'
 import AdicionarUsuario from './adicionar-usuario/adicionar-usuario.vue'
 import BoxUsuario from '../../../components/box-usuario/box-usuario.vue'
-import ImportUsuario from './import-usuario/import-usuario.vue'
+import ImportUsuario from '../../../components/modal-import/modal-import.vue'
 
 export default {
   components: {
@@ -25,6 +25,9 @@ export default {
         .then(data => {
           this.professores = data
         })
+    },
+    importarUsuarios (usuarios) {
+      console.log(usuarios)
     }
   },
   created () {
