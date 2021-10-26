@@ -1,0 +1,38 @@
+<div id="import-usuario">
+    <b-button variant="primary" v-b-modal.modal-import-usuario>Importar Usuários <i class="fas fa-upload"></i>
+    </b-button>
+    <b-modal id="modal-import-usuario" title="Importar Usuários" hide-footer size="lg">
+
+        <b-form @submit="importarUsuarios">
+            <b-form-group id="input-group-arquivo" label="Selecione um arquivo (.csv) de seu dispositivo:"
+                label-for="input-arquivo">
+                <b-form-file accept=".csv" v-model="arquivo" :state="Boolean(arquivo)" browse-text="Procurar"
+                    placeholder="Selecione um arquivo ou arraste aqui..." drop-placeholder="Arraste um arquivo aqui">
+                </b-form-file>
+                <div class="mt-3">Arquivo selecionado: {{ arquivo ? arquivo.name : '' }}</div>
+            </b-form-group>
+
+            <b-table :hidden="rows == 0" id="table-usuario" :items="usuarios" :per-page="qtdRegistros"
+                :current-page="pagina" striped hover small></b-table>
+
+            <b-pagination :hidden="rows == 0" v-model="pagina" :total-rows="rows" :per-page="qtdRegistros"
+                aria-controls="table-usuarios">
+            </b-pagination>
+
+            <b-row>
+                <b-col>
+                    <b-button block :disabled="arquivo == null" variant="warning" @click="limparArquivo">Limpar <i
+                            class="fa fa-eraser"></i></b-button>
+                </b-col>
+                <b-col>
+                    <b-button block :disabled="arquivo == null || usuarios.length > 0" variant="primary" @click="lerArquivo">Ler arquivo <i
+                            class="fa fa-file"></i></b-button>
+                </b-col>
+                <b-col>
+                    <b-button block :disabled="usuarios.length == 0" variant="success" type="submit">Importar <i
+                            class="fas fa-upload"></i></b-button>
+                </b-col>
+            </b-row>
+        </b-form>
+    </b-modal>
+</div>

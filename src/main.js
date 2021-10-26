@@ -6,6 +6,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// SweetAlert
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
+
+// Vue Mask
+import VueMask from 'v-mask'
+
 // AdminLTE JS
 require('admin-lte/plugins/jquery/jquery.min.js')
 require('admin-lte/plugins/popper/popper.min.js')
@@ -18,17 +25,10 @@ require('admin-lte/dist/js/adminlte.min.js')
 require('admin-lte/plugins/fontawesome-free/css/all.min.css')
 require('admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')
 require('admin-lte/dist/css/adminlte.min.css')
-
-// SweetAlert
-import VueSweetalert2 from 'vue-sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
-Vue.use(VueSweetalert2);
+Vue.use(VueSweetalert2)
 
 // Moment
 Vue.use(require('vue-moment'))
-
-// Vue Mask
-import VueMask from 'v-mask'
 Vue.use(VueMask)
 
 Vue.config.productionTip = false
