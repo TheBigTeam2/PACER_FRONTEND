@@ -8,7 +8,7 @@
                 <app-adicionar-usuario @usuarioAdicionado="buscarUsuarios"/>
             </b-col>
             <b-col>
-                <app-import-usuario titulo="Importar Usuários" @onImport="importarUsuarios"/>
+                <app-import-usuario titulo="Importar Usuários" @onImport="importarUsuarios" :titulos="titulos"/>
             </b-col>
         </b-row>
         <b-row class="mt-3 w-100">

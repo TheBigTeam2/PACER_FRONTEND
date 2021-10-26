@@ -1,8 +1,7 @@
-
 import XLSX from 'xlsx'
 
 export default {
-  props: ['titulo'],
+  props: ['titulo', 'titulos'],
   data: () => ({
     arquivo: null,
     linhas: [],
@@ -15,6 +14,16 @@ export default {
     }
   },
   methods: {
+    validarTitulos (titulos) {
+      if (this.titulos && typeof this.titulos === 'object' && this.titulos?.length > 0) {
+        if (titulos == null || titulos === undefined) { return false }
+        for (let i = 0; i < titulos.length; i++) {
+          const titulo = titulos[i]
+          if (titulo !== this.titulos[i]) { return false }
+        }
+      }
+      return true
+    },
     lerArquivo (event) {
       event.preventDefault()
 
@@ -36,23 +45,31 @@ export default {
           const linhas = []
           if (data != null && data.length > 0) {
             const titulos = data[0]
-            for (let i = 1; i < data.length; i++) {
-              const linha = data[i]
-              const registro = {}
-              for (let j = 0; j < linha.length; j++) {
-                const valor = linha[j]
-                registro[titulos[j]] = valor
+            if (this.validarTitulos(titulos)) {
+              for (let i = 1; i < data.length; i++) {
+                const linha = data[i]
+                const registro = {}
+                for (let j = 0; j < linha.length; j++) {
+                  const valor = linha[j]
+                  registro[titulos[j]] = valor
+                }
+                linhas.push(registro)
               }
-              linhas.push(registro)
-            }
-            setTimeout(() => {
-              this.linhas = linhas
+              setTimeout(() => {
+                this.linhas = linhas
+                this.$swal.fire({
+                  title: 'Sucesso!',
+                  text: 'Arquivo lido com sucesso.',
+                  icon: 'success'
+                })
+              }, 1000)
+            } else {
               this.$swal.fire({
-                title: 'Sucesso!',
-                text: 'Arquivo lido com sucesso.',
-                icon: 'success'
+                title: 'Erro!',
+                text: 'Arquivo de importação inválido!',
+                icon: 'error'
               })
-            }, 1000)
+            }
           }
         }
 

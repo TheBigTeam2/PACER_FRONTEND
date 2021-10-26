@@ -11,7 +11,8 @@ export default {
   },
   data: () => ({
     alunos: [],
-    professores: []
+    professores: [],
+    titulos: ['usu_id', 'usu_rg', 'usu_cpf', 'usu_nome', 'usu_auth']
   }),
   methods: {
     buscarUsuarios () {
