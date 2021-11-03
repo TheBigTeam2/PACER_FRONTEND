@@ -13,18 +13,24 @@
         </b-row>
         <b-row class="mt-3 w-100">
             <div class="content-header w-100">
-                <h1>Professores</h1>
+                <h1 class="border-bottom pb-2">Professores</h1>
             </div>
             <b-col cols="6" sm="4" md="3" lg="2" class="mb-2" v-for="professor in professores" :key="professor.usu_nome">
-                <app-box-usuario :usuario="professor"/>
+                <app-box-usuario :usuario="professor" @clickBox="removerUsuario"/>
+            </b-col>
+            <b-col v-if="professores.length === 0">
+                <h5 class="bg-white p-3 border text-center rounded">Não há professores cadastrados no sistema.</h5>
             </b-col>
         </b-row>
         <b-row class="mt-3 w-100">
             <div class="content-header w-100">
-                <h1>Alunos</h1>
+                <h1 class="border-bottom pb-2">Alunos</h1>
             </div>
             <b-col cols="6" sm="4" md="3" lg="2" class="mb-2" v-for="aluno in alunos" :key="aluno.usu_nome">
-                <app-box-usuario :usuario="aluno"/>
+                <app-box-usuario :usuario="aluno" @clickBox="removerUsuario"/>
+            </b-col>
+            <b-col v-if="alunos.length === 0">
+                <h5 class="bg-white p-3 border text-center rounded">Não há alunos cadastrados no sistema.</h5>
             </b-col>
         </b-row>
     </div>

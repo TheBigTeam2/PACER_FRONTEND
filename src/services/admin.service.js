@@ -12,6 +12,10 @@ class AdminService {
   buscarProfessores () {
     return api.get('/professores')
   }
+
+  removerUsuario (id) {
+    return api.delete('/usuario?id=' + id)
+  }
 }
 
 export default new AdminService()

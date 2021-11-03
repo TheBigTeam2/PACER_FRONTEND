@@ -29,6 +29,25 @@ export default {
     },
     importarUsuarios (usuarios) {
       console.log(usuarios)
+    },
+    removerUsuario (usuario) {
+      this.$swal.fire({
+        title: 'Atenção!',
+        text: 'Deseja mesmo remover este usuário?',
+        icon: 'warning',
+        showDenyButton: true,
+        confirmButtonText: 'Manter',
+        denyButtonText: 'Remover'
+      }).then(res => {
+        if (res.isDenied) {
+          this.$swal.fire({
+            title: 'Removendo usuário'
+          })
+          this.$swal.showLoading()
+          AdminService.removerUsuario(usuario.usu_id)
+            .then(res => console.log(res))
+        }
+      })
     }
   },
   created () {
