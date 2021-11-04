@@ -26,6 +26,18 @@ class ProfessorService {
   enviarSelecao (dados) {
     return api.post('/adicionar-alunos-as-equipes', dados)
   }
+  
+  adicionarCriterioAvaliacao (nome) {
+    return api.post('/criterio', { nome })
+  }
+
+  atualizarCriterioAvaliacao (id, nome) {
+    return api.put(`/criterio?id=${id}`, { nome })
+  }
+
+  excluirCriterioAvaliacao (id) {
+    return api.delete(`/criterio?id=${id}`)
+  }
 }
 
 export default new ProfessorService()
