@@ -1,0 +1,36 @@
+<div id="criterio-avaliacao">
+    <b-button variant="primary" v-b-modal.modal-criterio-avaliacao>Cadastrar novo critério de avaliação</b-button>
+    <b-modal 
+        id="modal-criterio-avaliacao" 
+        title="Cadastrar novo critério de avaliação"
+        hide-footer
+        size="lg">
+        
+        <b-form @submit="adicionarCriterio">
+            <b-form-group
+                id="input-group-sprint"
+                label="Critério de Avaliação"
+                label-for="input-sprint">
+                <b-form-input
+                    id="input-sprint"
+                    v-model="name"
+                    placeholder="Informe o nome do critério de avaliação"/>
+            </b-form-group>
+
+            <b-button variant="success" type="submit">Adicionar</b-button>
+        </b-form>
+    </b-modal>
+   
+</div>
+<b-row>
+    <b-col>
+        <b-table>
+            <b-table id="table-criterios" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
+                striped hover small></b-table>
+
+            <b-pagination v-model="pagina" :total-rows="qtdCriterios" :per-page="qtdRegistros"
+                aria-controls="table-criterios">
+            </b-pagination>
+        </b-table>
+    </b-col>
+</b-row>
