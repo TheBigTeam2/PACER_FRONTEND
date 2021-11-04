@@ -9,6 +9,7 @@ import Usuario from '../views/admin/usuario/usuario.vue'
 import Disciplina from '../views/admin/disciplina/disciplina.vue'
 import Equipe from '../views/admin/equipe/equipe.vue'
 import Equipes from '../views/professor/equipes/equipes.vue'
+import adicionarAlunosAsEquipes from '../views/professor/adicionar-alunos-as-equipes/adicionar-alunos-as-equipes.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,11 @@ const routes = [
         path: '/professor/equipes',
         name: 'Professor Equipes',
         component: Equipes
+      },
+      {
+        path: '/professor/equipe/:disciplina',
+        name: 'Professor Equipes',
+        component: adicionarAlunosAsEquipes
       }
     ]
   },

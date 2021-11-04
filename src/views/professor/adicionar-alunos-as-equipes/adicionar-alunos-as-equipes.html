@@ -1,0 +1,48 @@
+<div id="professor-equipes">
+    <div class="content-header border-bottom">
+        <h1>Adicionar alunos as equipes</h1>
+    </div>
+    <div class="content py-3">
+        <b-row>
+            <b-col cols="12" class="mb-2">
+                <b-button variant="primary" @click="enviarSelecao">Enviar seleção</b-button>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col cols="2">
+                <div class="content-header text-dark p-0">
+                    <h1 class="bg-white d-inline-block px-3 pt-2 rounded-top border">Alunos</h1>
+                </div>
+                <drag-container 
+                    @drop="onDrop(null, $event)" 
+                    group-name="equipe" 
+                    orientation="vertical"
+                    :get-child-payload="(index) => getChild(null, index)"
+                    class="border bg-white mb-2 w-100"
+                    style="min-height: 156px"
+                    behaviour="drop-zone">
+                    <drag-draggable v-for="aluno in alunos">
+                        <app-box-usuario :usuario="aluno" class="my-2"></app-box-usuario>
+                    </drag-draggable>
+                </drag-container>
+            </b-col>
+            <b-col cols="2" v-for="equipe in equipes">
+                <div class="content-header text-dark p-0">
+                    <h1 class="bg-white d-inline-block px-3 pt-2 rounded-top border">{{equipe.equ_nome}}</h1>
+                </div>
+                <drag-container 
+                    @drop="onDrop(equipe.equ_id, $event)" 
+                    group-name="equipe" 
+                    orientation="vertical"
+                    class="border bg-white mb-2 w-100" 
+                    style="min-height: 156px"
+                    :get-child-payload="(index) => getChild(equipe.equ_id, index)"
+                    behaviour="drop-zone">
+                    <drag-draggable v-for="aluno in equipe.equ_alunos">
+                        <app-box-usuario :usuario="aluno" class="draggable-item my-2"></app-box-usuario>
+                    </drag-draggable>
+                </drag-container>
+            </b-col>
+        </b-row>
+    </div>
+</div>

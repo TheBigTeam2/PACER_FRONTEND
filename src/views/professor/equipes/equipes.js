@@ -8,7 +8,13 @@ export default {
         'app-box-equipe': BoxEquipe
     },
     data: () => ({
-        equipes: []
+        equipes: [],
+        disciplinas: [
+            {
+                id: 1,
+                nome: 'Algoritmos'
+            }
+        ]
     }),
     methods: {
         buscarEquipes () {

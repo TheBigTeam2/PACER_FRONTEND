@@ -45,7 +45,14 @@ export default {
           })
           this.$swal.showLoading()
           AdminService.removerUsuario(usuario.usu_id)
-            .then(res => console.log(res))
+            .then(() => {
+              this.$swal.fire({
+                title: 'Sucesso!',
+                text: 'O usuário foi removido com sucesso.',
+                icon: 'success'
+              })
+              this.buscarUsuarios()
+            })
         }
       })
     }
