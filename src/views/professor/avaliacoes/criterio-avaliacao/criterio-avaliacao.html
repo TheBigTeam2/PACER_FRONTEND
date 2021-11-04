@@ -19,18 +19,18 @@
 
             <b-button variant="success" type="submit">Adicionar</b-button>
         </b-form>
-    </b-modal>
-   
-</div>
-<b-row>
-    <b-col>
-        <b-table>
-            <b-table id="table-criterios" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
-                striped hover small></b-table>
+        
+        <b-row>
+            <b-col>
+                <b-table>
+                    <b-table id="table-criterios" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
+                        striped hover small></b-table>
 
-            <b-pagination v-model="pagina" :total-rows="qtdCriterios" :per-page="qtdRegistros"
-                aria-controls="table-criterios">
-            </b-pagination>
-        </b-table>
-    </b-col>
-</b-row>
+                    <b-pagination v-model="pagina" :total-rows="qtdCriterios" :per-page="qtdRegistros"
+                        aria-controls="table-criterios">
+                    </b-pagination>
+                </b-table>
+            </b-col>
+        </b-row>
+    </b-modal>
+</div>
