@@ -33,7 +33,7 @@
                     <b-table id="table-criterios" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
                         striped hover small></b-table>
 
-                    <h3  class="text-center" :hidden="qtdCriterios != 0"> Sem registros!</h3>
+                    <h5 class="bg-white p-3 border text-center rounded" :hidden="qtdCriterios != 0">Não há critérios cadastrados no sistema.</h5>
 
                     <b-pagination :hidden="qtdCriterios == 0" v-model="pagina" :total-rows="qtdCriterios"
                         :per-page="qtdRegistros" aria-controls="table-criterios">

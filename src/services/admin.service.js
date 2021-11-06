@@ -16,6 +16,10 @@ class AdminService {
   removerUsuario (id) {
     return api.delete('/usuario?id=' + id)
   }
+
+  importarUsuarios (usuarios) {
+    return api.post('/usuarios', usuarios)
+  }
 }
 
 export default new AdminService()

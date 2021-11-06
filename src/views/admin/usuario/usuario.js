@@ -28,7 +28,37 @@ export default {
         })
     },
     importarUsuarios (usuarios) {
-      console.log(usuarios)
+      if (usuarios !== null && usuarios?.length > 0) {
+        AdminService.importarUsuarios(usuarios).then(response => {
+          if (response.status === 200) {
+            this.$swal.fire({
+              title: 'Sucesso!',
+              text: 'Usuários importados com sucesso!',
+              icon: 'success'
+            })
+            this.buscarUsuarios()
+          } else {
+            this.$swal.fire({
+              title: 'Erro!',
+              text: 'Ocorreu um erro ao importar os usuários',
+              icon: 'error'
+            })
+          }
+        }).catch(error => {
+          console.error(error)
+          this.$swal.fire({
+            title: 'Erro!',
+            text: 'Ocorreu um erro ao importar os usuários',
+            icon: 'error'
+          })
+        })
+      } else {
+        this.$swal.fire({
+          title: 'Erro!',
+          text: 'Nenhum usuário importado',
+          icon: 'error'
+        })
+      }
     },
     removerUsuario (usuario) {
       this.$swal.fire({
