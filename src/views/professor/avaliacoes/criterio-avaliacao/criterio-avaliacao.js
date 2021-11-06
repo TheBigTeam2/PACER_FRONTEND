@@ -86,6 +86,8 @@ export default {
               icon: 'error'
             })
           })
+          this.id = null
+          this.name = ''
         }
 
         if (this['ac-add'] && !this['ac-criterios']) {
@@ -115,6 +117,7 @@ export default {
           this.$swal.showLoading()
           ProfessorService.excluirCriterioAvaliacao(this.id)
             .then(() => {
+              this.id = null
               this.$swal.fire({
                 title: 'Sucesso!',
                 text: 'O critério foi removido com sucesso.',
