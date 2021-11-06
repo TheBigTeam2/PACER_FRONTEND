@@ -1,9 +1,9 @@
 <div id="criterio-avaliacao">
     <b-button variant="primary" v-b-modal.modal-criterio-avaliacao>Cadastrar novo critério de avaliação</b-button>
-    <b-modal id="modal-criterio-avaliacao" title="Cadastrar novo critério de avaliação" hide-footer size="lg">
+    <b-modal id="modal-criterio-avaliacao" title="Critérios de Avaliação" hide-footer size="lg">
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-button block v-b-toggle.ac-add >Novo Critério <i class="fa fa-plus"></i>
+                <b-button block v-b-toggle.ac-add variant="primary">Novo Critério <i class="fa fa-plus"></i>
                 </b-button>
             </b-card-header>
             <b-collapse id="ac-add" visible accordion="my-accordion-2" role="tabpanel">
@@ -13,7 +13,7 @@
                             <b-form-input id="input-sprint" v-model="name"
                                 placeholder="Informe o nome do critério de avaliação" />
                         </b-form-group>
-                        <b-button variant="success" block type="submit">Adicionar <i class="fa fa-save"></i></b-button>
+                        <b-button variant="success" block type="submit">Salvar <i class="fa fa-save"></i></b-button>
 
                     </b-form>
                 </b-card-body>
@@ -23,17 +23,34 @@
 
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
-                <b-button block v-b-toggle.ac-criterios >Critérios <i class="fa fa-list"></i></b-button>
+                <b-button block v-b-toggle.ac-criterios variant="primary">Critérios <i class="fa fa-list"></i>
+                </b-button>
             </b-card-header>
             <b-collapse id="ac-criterios" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-                    <b-button variant="warning" @click="buscarCriterios"> Atualizar <i class="fas fa-search"></i>
-                    </b-button>
+                    <b-row>
+                        <b-col>
+                            <b-button class="mb-2" variant="info" size="sm" @click="buscarCriterios"> Atualizar <i
+                                    class="fa fa-sync"></i>
+                            </b-button>
+                        </b-col>
+                    </b-row>
 
-                    <b-table id="table-criterios" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
-                        striped hover small></b-table>
+                    <b-table id="table-criterios" :fields="campos" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
+                        striped hover small>
+                        <template #cell(actions)="row">
+                            <b-button variant="primary" size="sm" @click="alterar(row)" class="mr-1">
+                                <i class="fa fa-edit"></i>
+                            </b-button>
+                            <b-button variant="danger" size="sm" @click="excluir(row)">
+                                <i class="fa fa-trash"></i>
+                            </b-button>
+                        </template>
 
-                    <h5 class="bg-white p-3 border text-center rounded" :hidden="qtdCriterios != 0">Não há critérios cadastrados no sistema.</h5>
+                    </b-table>
+
+                    <h5 class="bg-white p-3 border text-center rounded" :hidden="qtdCriterios != 0">Não há critérios
+                        cadastrados no sistema.</h5>
 
                     <b-pagination :hidden="qtdCriterios == 0" v-model="pagina" :total-rows="qtdCriterios"
                         :per-page="qtdRegistros" aria-controls="table-criterios">
