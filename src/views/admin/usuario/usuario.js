@@ -29,6 +29,11 @@ export default {
     },
     importarUsuarios (usuarios) {
       if (usuarios !== null && usuarios?.length > 0) {
+        usuarios = usuarios.map(usuario => {
+          usuario.usu_rg = usuario.usu_rg.toString()
+          usuario.usu_cpf = usuario.usu_cpf.toString()
+          return usuario
+        })
         AdminService.importarUsuarios(usuarios).then(response => {
           if (response.status === 200) {
             this.$swal.fire({
