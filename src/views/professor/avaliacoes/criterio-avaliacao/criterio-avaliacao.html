@@ -1,36 +1,46 @@
 <div id="criterio-avaliacao">
     <b-button variant="primary" v-b-modal.modal-criterio-avaliacao>Cadastrar novo critério de avaliação</b-button>
-    <b-modal 
-        id="modal-criterio-avaliacao" 
-        title="Cadastrar novo critério de avaliação"
-        hide-footer
-        size="lg">
-        
-        <b-form @submit="adicionarCriterio">
-            <b-form-group
-                id="input-group-sprint"
-                label="Critério de Avaliação"
-                label-for="input-sprint">
-                <b-form-input
-                    id="input-sprint"
-                    v-model="name"
-                    placeholder="Informe o nome do critério de avaliação"/>
-            </b-form-group>
+    <b-modal id="modal-criterio-avaliacao" title="Cadastrar novo critério de avaliação" hide-footer size="lg">
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button block v-b-toggle.ac-add >Novo Critério <i class="fa fa-plus"></i>
+                </b-button>
+            </b-card-header>
+            <b-collapse id="ac-add" visible accordion="my-accordion-2" role="tabpanel">
+                <b-card-body>
+                    <b-form @submit="adicionarCriterio">
+                        <b-form-group id="input-group-sprint" label="Critério de Avaliação" label-for="input-sprint">
+                            <b-form-input id="input-sprint" v-model="name"
+                                placeholder="Informe o nome do critério de avaliação" />
+                        </b-form-group>
+                        <b-button variant="success" block type="submit">Adicionar <i class="fa fa-save"></i></b-button>
 
-            <b-button variant="success" type="submit">Adicionar</b-button>
-        </b-form>
-        
-        <b-row>
-            <b-col>
-                <b-table>
+                    </b-form>
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+
+
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                <b-button block v-b-toggle.ac-criterios >Critérios <i class="fa fa-list"></i></b-button>
+            </b-card-header>
+            <b-collapse id="ac-criterios" accordion="my-accordion" role="tabpanel">
+                <b-card-body>
+                    <b-button variant="warning" @click="buscarCriterios"> Atualizar <i class="fas fa-search"></i>
+                    </b-button>
+
                     <b-table id="table-criterios" :items="criterios" :per-page="qtdRegistros" :current-page="pagina"
                         striped hover small></b-table>
 
-                    <b-pagination v-model="pagina" :total-rows="qtdCriterios" :per-page="qtdRegistros"
-                        aria-controls="table-criterios">
+                    <h3  class="text-center" :hidden="qtdCriterios != 0"> Sem registros!</h3>
+
+                    <b-pagination :hidden="qtdCriterios == 0" v-model="pagina" :total-rows="qtdCriterios"
+                        :per-page="qtdRegistros" aria-controls="table-criterios">
                     </b-pagination>
-                </b-table>
-            </b-col>
-        </b-row>
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+
     </b-modal>
 </div>

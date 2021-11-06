@@ -26,7 +26,7 @@ class ProfessorService {
   enviarSelecao (dados) {
     return api.post('/adicionar-alunos-as-equipes', dados)
   }
-  
+
   adicionarCriterioAvaliacao (nome) {
     return api.post('/criterio', { nome })
   }
@@ -37,6 +37,10 @@ class ProfessorService {
 
   excluirCriterioAvaliacao (id) {
     return api.delete(`/criterio?id=${id}`)
+  }
+
+  buscarCriterios () {
+    return api.get('/criterios')
   }
 }
 

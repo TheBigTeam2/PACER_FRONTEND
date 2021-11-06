@@ -5,7 +5,7 @@ export default {
   props: {},
   data: () => ({
     name: null,
-    criterios: [{ nome: 'teste', b: '2' }, { nome: 'teste', b: '2' }],
+    criterios: [],
     pagina: 1,
     qtdRegistros: 5
   }),
@@ -14,7 +14,19 @@ export default {
       return this.criterios.length
     }
   },
+  created () {
+    this.buscarCriterios()
+  },
   methods: {
+    buscarCriterios () {
+      ProfessorService.buscarCriterios().then(r => {
+        if (r.data) {
+          this.criterios = r.data
+        }
+      }).catch(error => {
+        console.error(error)
+      })
+    },
     adicionarCriterio (e) {
       e.preventDefault()
       if (this.name != null && this.name.length > 0) {
@@ -35,6 +47,11 @@ export default {
             icon: 'error'
           })
         })
+
+        if (this['ac-add'] && !this['ac-criterios']) {
+          this.$root.$emit('bv::toggle::collapse', 'ac-add')
+          this.$root.$emit('bv::toggle::collapse', 'ac-criterios')
+        }
       } else {
         this.$swal.fire({
           title: 'Atenção!',
@@ -43,5 +60,10 @@ export default {
         })
       }
     }
+  },
+  mounted () {
+    this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
+      this[collapseId] = isJustShown
+    })
   }
 }
