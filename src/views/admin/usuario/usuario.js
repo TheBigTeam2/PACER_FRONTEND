@@ -2,17 +2,21 @@ import AdminService from '../../../services/admin.service'
 import AdicionarUsuario from './adicionar-usuario/adicionar-usuario.vue'
 import BoxUsuario from '../../../components/box-usuario/box-usuario.vue'
 import ImportUsuario from '../../../components/modal-import/modal-import.vue'
+import adminService from '../../../services/admin.service'
+import alterarUsuario from './alterar-usuario/alterar-usuario.vue'
 
 export default {
   components: {
     'app-adicionar-usuario': AdicionarUsuario,
     'app-box-usuario': BoxUsuario,
-    'app-import-usuario': ImportUsuario
+    'app-import-usuario': ImportUsuario,
+    'app-alterar-usuario': alterarUsuario
   },
   data: () => ({
     alunos: [],
     professores: [],
-    titulos: ['usu_id', 'usu_rg', 'usu_cpf', 'usu_nome', 'usu_auth']
+    titulos: ['usu_id', 'usu_rg', 'usu_cpf', 'usu_nome', 'usu_auth'],
+    usuario: null
   }),
   methods: {
     buscarUsuarios () {
@@ -34,6 +38,10 @@ export default {
           usuario.usu_cpf = usuario.usu_cpf.toString()
           return usuario
         })
+        this.$swal.fire({
+          title: 'Importando usuários, aguarde...'
+        })
+        this.$swal.showLoading()
         AdminService.importarUsuarios(usuarios).then(response => {
           if (response.status === 200 || response.status === 201) {
             this.$swal.fire({
@@ -65,31 +73,36 @@ export default {
         })
       }
     },
-    removerUsuario (usuario) {
+    opcoesUsuario (usuario) {
       this.$swal.fire({
         title: 'Atenção!',
-        text: 'Deseja mesmo remover este usuário?',
-        icon: 'warning',
-        showDenyButton: true,
-        confirmButtonText: 'Manter',
-        denyButtonText: 'Remover'
+        text: `Deseja alterar ou remover o usuário ${usuario.usu_nome}?`,
+        confirmButtonText: 'Alterar',
+        denyButtonText: 'Remover',
+        showDenyButton: true
       }).then(res => {
-        if (res.isDenied) {
-          this.$swal.fire({
-            title: 'Removendo usuário'
-          })
-          this.$swal.showLoading()
-          AdminService.removerUsuario(usuario.usu_id)
-            .then(() => {
+          if (res.isDenied) {
               this.$swal.fire({
-                title: 'Sucesso!',
-                text: 'O usuário foi removido com sucesso.',
-                icon: 'success'
+                  title: 'Removendo equipe, aguarde...'
               })
-              this.buscarUsuarios()
-            })
-        }
+              this.$swal.showLoading()
+              adminService.removerUsuario(usuario.usu_id)
+                  .then(() => {
+                    this.$swal.fire({
+                      title: 'Sucesso!',
+                      text: 'Usuário removido com sucesso.',
+                      icon: 'success'
+                    })
+                    this.buscarUsuarios()
+                  })
+          }
+          else if (res.isConfirmed) {
+              this.usuario = usuario
+          }
       })
+    },
+    removerSelecao() {
+      this.usuario = null
     }
   },
   created () {

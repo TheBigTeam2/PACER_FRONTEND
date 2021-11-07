@@ -17,6 +17,10 @@ class AdminService {
     return api.delete('/usuario?id=' + id)
   }
 
+  alterarUsuario (id, dados) {
+    return api.put('/usuario?id=' + id, dados)
+  }
+
   importarUsuarios (usuarios) {
     return api.post('/usuarios', usuarios)
   }
