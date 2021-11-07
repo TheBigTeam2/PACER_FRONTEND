@@ -24,7 +24,7 @@ class ProfessorService {
   }
 
   enviarSelecao (dados) {
-    return api.post('/adicionar-alunos-as-equipes', dados)
+    return Promise.all(dados.map(atribuicao => api.put('/atribuir', atribuicao)))
   }
 
   adicionarCriterioAvaliacao (nome) {

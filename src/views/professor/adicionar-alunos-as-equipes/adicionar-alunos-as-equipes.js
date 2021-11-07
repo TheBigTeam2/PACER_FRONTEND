@@ -15,16 +15,23 @@ export default {
     }),
     methods: {
         buscarEquipes () {
-            professorService.buscarEquipes()
-                .then(res => res.data)
-                .then(equipes => {
-                    this.equipes = equipes.filter(equipe => equipe.equ_disciplina == this.disciplina)
-                })
+            return professorService.buscarEquipes()
+                    .then(res => res.data)
         },
         buscarAlunos () {
-            professorService.buscarAlunos()
-                .then(res => res.data)
-                .then(alunos => {
+            return professorService.buscarAlunos()
+                    .then(res => res.data)
+        },
+        buscarDados () {
+            Promise.all([this.buscarEquipes(), this.buscarAlunos()])
+                .then(res => {
+                    let equipes = res[0]
+                    let alunos = res[1]
+                    
+                    let alunosComEquipes = equipes.reduce((todosAlunos, equipe) => todosAlunos.concat(equipe.equ_alunos), [])
+                    alunos = alunos.filter(aluno => alunosComEquipes.filter(ace => ace.usu_id === aluno.usu_id).length === 0)
+                    
+                    this.equipes = equipes
                     this.alunos = alunos
                 })
         },
@@ -76,7 +83,6 @@ export default {
     },
     created () {
         this.disciplina = this.$route.params.disciplina
-        this.buscarEquipes()
-        this.buscarAlunos()
+        this.buscarDados()
     }
 }

@@ -24,16 +24,10 @@ export default {
   },
   methods: {
     buscarCriterios () {
-      this.$swal.showLoading()
       ProfessorService.buscarCriterios().then(r => {
         if (r.data) {
           this.criterios = r.data
         }
-        this.$swal.fire({
-          title: 'Sucesso!',
-          text: 'Critérios atualizados!',
-          icon: 'success'
-        })
       }).catch(error => {
         console.error(error)
         this.$swal.fire({
