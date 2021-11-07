@@ -15,6 +15,14 @@ class ProfessorService {
     return api.post('/equipe', dados)
   }
 
+  removerEquipe (id) {
+    return api.delete('/equipe?id=' + id)
+  }
+
+  atualizarEquipe (id, dados) {
+    return api.put('/equipe?id=' + id, dados)
+  }
+
   buscarEquipes () {
     return api.get('/equipes')
   }

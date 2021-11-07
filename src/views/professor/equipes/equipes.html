@@ -16,10 +16,11 @@
             <b-col cols="12">
                 <b-row>
                     <b-col cols="6" sm="4" md="3" lg="2" class="mb-2" v-for="equipe in equipes">
-                        <app-box-equipe :equipe="equipe"/>
+                        <app-box-equipe :equipe="equipe" @clickBox="opcoesEquipe"/>
                     </b-col>
                 </b-row>
             </b-col>
         </b-row>
     </div>
+    <app-atualizar-equipe v-if="equipe" :equipe="equipe" @removerSelecao="removerSelecao" @equipeAtualizada="buscarEquipes"/>
 </div>

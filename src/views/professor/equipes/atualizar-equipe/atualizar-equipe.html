@@ -1,0 +1,33 @@
+<b-modal 
+    id="modal-adicionar-equipe" 
+    title="Atualizar Equipe"
+    hide-footer
+    :visible="true"
+    size="lg"
+    @hidden="$emit('removerSelecao')">
+    
+    <b-form @submit="atualizarEquipe">
+        <b-form-group
+            id="input-group-nome"
+            label="Qual será o nome da equipe?"
+            label-for="input-nome">
+            <b-form-input
+                id="input-nome"
+                v-model="form.nome"
+                type="text"
+                placeholder="Informe o nome da equipe"
+                required/>
+        </b-form-group>
+
+        <b-form-group
+            id="input-group-disciplina"
+            label="A qual disciplina a equipe fará parte?"
+            label-for="input-disciplina">
+            <b-form-select
+                id="input-disciplina"
+                v-model="form.disciplina"
+                :options="disciplinas"/>
+        </b-form-group>
+        <b-button variant="success" type="submit">Atualizar</b-button>
+    </b-form>
+</b-modal>
