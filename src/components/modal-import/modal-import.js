@@ -81,6 +81,7 @@ export default {
       if (this.linhas != null && this.linhas.length > 0) {
         this.$emit('onImport', this.linhas)
         this.$bvModal.hide('modal-import-modal')
+        this.limparArquivo()
       }
     },
     limparArquivo () {
