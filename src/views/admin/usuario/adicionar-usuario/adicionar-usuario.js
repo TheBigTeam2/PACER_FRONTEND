@@ -21,7 +21,12 @@ export default {
       })
       this.$swal.showLoading()
 
-      AdminService.cadastrarUsuario(this.form)
+      AdminService.cadastrarUsuario({
+        usu_cpf: this.form.cpf,
+        usu_rg: this.form.rg,
+        usu_nome: this.form.nome,
+        usu_auth: this.form.auth
+      })
         .then(res => res.data)
         .then(data => {
           this.$swal.fire({
