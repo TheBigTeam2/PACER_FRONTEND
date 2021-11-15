@@ -24,7 +24,9 @@
                     <tbody>
                         <tr v-for="projeto in projetos">
                             <td>{{projeto.pro_tema}}</td>
-                            <td>{{projeto.pro_disciplinas}}</td>
+                            <td>
+                                <span class="d-block" v-for="disciplina in projeto.pro_disciplinas">{{disciplina.dis_nome}} - {{disciplina.dis_curso}} - {{periodos[disciplina.dis_periodo]}}</span>
+                            </td>
                             <td>{{projeto.pro_inicio | moment('DD/MM/YYYY')}}</td>
                             <td>{{projeto.pro_termino | moment('DD/MM/YYYY')}}</td>
                             <td>
@@ -43,5 +45,5 @@
             </b-col>
         </b-row>
     </div>
-    <!-- <app-atualizar-equipe v-if="equipe" :equipe="equipe" @removerSelecao="removerSelecao" @equipeAtualizada="buscarEquipes"/> -->
+    <app-atualizar-projeto v-if="projeto" :projeto="projeto" @removerSelecao="removerSelecao" @projetoAtualizado="buscarProjetos"/>
 </div>

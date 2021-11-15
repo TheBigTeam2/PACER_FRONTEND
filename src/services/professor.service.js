@@ -82,6 +82,10 @@ class ProfessorService {
   removerProjeto (id) {
     return api.delete('/projeto?id=' + id)
   }
+
+  atualizarProjeto (id, dados) {
+    return api.put('/projeto?id=' + id, dados)
+  }
 }
 
 export default new ProfessorService()

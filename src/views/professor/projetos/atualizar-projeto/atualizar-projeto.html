@@ -1,0 +1,55 @@
+<b-modal 
+    id="modal-atualizar-projeto" 
+    title="Atualizar Projeto"
+    hide-footer
+    :visible="true"
+    size="lg"
+    @hidden="$emit('removerSelecao')">
+    
+    <b-form @submit="atualizarProjeto">
+        <b-form-group
+            id="input-group-nome"
+            label="Projeto"
+            label-for="input-nome">
+            <b-form-input
+                id="input-nome"
+                v-model="form.pro_tema"
+                type="text"
+                placeholder="Informe o nome do projeto"
+                required/>
+        </b-form-group>
+
+        <b-form-group
+            id="input-group-data-inicio"
+            label="Data de início"
+            label-for="input-data-inicio">
+            <b-form-datepicker 
+                id="input-data-inicio" 
+                v-model="form.pro_inicio" 
+                placeholder="Selecione a data de início do projeto" 
+                locale="pt-br"/>
+        </b-form-group>
+        
+        <b-form-group
+            id="input-group-data-termino"
+            label="Data de termino"
+            label-for="input-data-termino">
+            <b-form-datepicker 
+                id="input-data-termino" 
+                v-model="form.pro_termino" 
+                placeholder="Selecione a data de término do projeto" 
+                locale="pt-br"/>
+        </b-form-group>
+        
+        <b-form-group
+            id="input-group-disciplinas"
+            label="Disciplinas"
+            label-for="input-disciplinas">
+            <v-select 
+                v-model="form.disciplinas"
+                :options="disciplinas" 
+                multiple></v-select>
+        </b-form-group>
+        <b-button variant="success" type="submit">Atualizar</b-button>
+    </b-form>
+</b-modal>

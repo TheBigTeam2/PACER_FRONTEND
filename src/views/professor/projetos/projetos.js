@@ -1,31 +1,26 @@
 import professorService from '@/services/professor.service'
 import adicionarProjeto from './adicionar-projeto/adicionar-projeto.vue'
+import atualizarProjeto from './atualizar-projeto/atualizar-projeto.vue'
 
 export default {
     components: {
-        'app-adicionar-projeto': adicionarProjeto
+        'app-adicionar-projeto': adicionarProjeto,
+        'app-atualizar-projeto': atualizarProjeto
     },
     data: () => ({
         projetos: [],
         periodos: [
             'Manhã',
             'Noite'
-        ]
+        ],
+        projeto: null
     }),
     methods: {
         buscarProjetos() {            
             professorService
                 .buscarProjetos()
                 .then(res => res.data)
-                .then(projetos => this.projetos = projetos.map(projeto => ({
-                    pro_id: projeto.pro_id,
-                    pro_tema: projeto.pro_tema,
-                    pro_inicio: projeto.pro_inicio,
-                    pro_termino: projeto.pro_termino,
-                    pro_disciplinas: projeto.pro_disciplinas.map(disciplina => {
-                        return `${disciplina.dis_nome} - ${disciplina.dis_curso} - ${this.periodos[disciplina.dis_periodo]}`
-                    }).join('<br>')
-                })))
+                .then(projetos => this.projetos = projetos)
         },
         removerProjeto(projeto) {
             this.$swal.fire({
@@ -60,6 +55,12 @@ export default {
                         })
                 }
             })
+        },
+        atualizarProjeto(projeto) {
+            this.projeto = projeto
+        },
+        removerSelecao() {
+            this.projeto = null
         }
     },
     created() {
