@@ -66,6 +66,22 @@ class ProfessorService {
   removerDisciplina (id) {
     return api.delete('/disciplina?id=' + id)
   }
+
+  buscarProjetos () {
+    api.post('/login', {
+      user: '29346390585',
+      password: 'mudar!@#'
+    }).then(res => console.log(res.data))
+    return api.get('/projetos')
+  }
+
+  adicionarProjeto (dados) {
+    return api.post('/projeto', dados)
+  }
+
+  removerProjeto (id) {
+    return api.delete('/projeto?id=' + id)
+  }
 }
 
 export default new ProfessorService()

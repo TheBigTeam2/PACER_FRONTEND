@@ -31,6 +31,11 @@ Vue.use(VueSweetalert2)
 Vue.use(require('vue-moment'))
 Vue.use(VueMask)
 
+// VueSelect
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+Vue.component('v-select', vSelect)
+
 Vue.config.productionTip = false
 
 new Vue({

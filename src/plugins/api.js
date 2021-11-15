@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseAPI = axios.create()
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJyb2xlIjoiUHJvZmVzc29yIiwiZXhwIjoxNjM3MDAxMDYwfQ.15ZQ8YDFr27pZM-Zl1Ja1RWJNmFmvZnhmc0leAqvvME'
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7InVzdV9pZCI6IjEiLCJ1c3VfcmciOiIzNTQxMDAyMDIiLCJ1c3VfY3BmIjoiMjkzNDYzOTA1ODUiLCJ1c3Vfbm9tZSI6IldhbG1pciBEdXF1ZSIsInVzdV9hdXRoIjoiUHJvZmVzc29yIiwidXN1X3NlbmhhIjoibXVkYXIhQCMifSwicm9sZSI6IlByb2Zlc3NvciIsImV4cCI6MTYzNzAxMTEyM30.wyNui5Z5JUXVudxkNNAaTuG1YkPYhqlQ9ywqN7esnSw"
 const apiUrl = 'http://localhost:8085/'
 
 baseAPI.interceptors.request.use(

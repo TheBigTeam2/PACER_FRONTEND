@@ -6,7 +6,7 @@ export default {
             dis_nome: null,
             dis_periodo: null,
             dis_curso: null,
-            dis_professor: 1
+            dis_professor: null
         },
         periodos: [
             {text: '-- Selecione um período --', value: null, disabled: true, selected: true},
@@ -38,5 +38,8 @@ export default {
             this.form.dis_periodo = null
             this.form.dis_curso = null
         }
+    },
+    created () {
+        this.form.dis_professor = this.$store.state.usuario.usu_id
     }
 }
