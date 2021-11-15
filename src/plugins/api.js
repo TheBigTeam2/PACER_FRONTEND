@@ -2,13 +2,13 @@ import axios from 'axios'
 
 const baseAPI = axios.create()
 
-const token = null
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxLCJyb2xlIjoiUHJvZmVzc29yIiwiZXhwIjoxNjM3MDAxMDYwfQ.15ZQ8YDFr27pZM-Zl1Ja1RWJNmFmvZnhmc0leAqvvME'
 const apiUrl = 'http://localhost:8085/'
 
 baseAPI.interceptors.request.use(
   function handleRequest (config) {
     if (apiUrl) config.baseURL = apiUrl
-    if (token) config.headers.Authorization = 'Bearer ' + token
+    if (token) config.headers.token = token
     return config
   },
   function handleError (error) {

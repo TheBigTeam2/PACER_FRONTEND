@@ -50,6 +50,22 @@ class ProfessorService {
   buscarCriterios () {
     return api.get('/criterios')
   }
+
+  buscarDisciplinas () {
+    return api.get('/disciplinas')
+  }
+
+  adicionarDisciplina (dados) {
+    return api.post('/disciplina', dados)
+  }
+
+  atualizarDisciplina (id, dados) {
+    return api.put('/disciplina?id=' + id, dados)
+  }
+
+  removerDisciplina (id) {
+    return api.delete('/disciplina?id=' + id)
+  }
 }
 
 export default new ProfessorService()

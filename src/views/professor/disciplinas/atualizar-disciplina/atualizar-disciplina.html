@@ -1,0 +1,46 @@
+<b-modal 
+    id="modal-adicionar-equipe" 
+    title="Atualizar Equipe"
+    hide-footer
+    :visible="true"
+    size="lg"
+    @hidden="$emit('removerSelecao')">
+    
+    <b-form @submit="atualizarDisciplina">
+        <b-form-group
+                id="input-group-nome"
+                label="Disciplina"
+                label-for="input-nome">
+                <b-form-input
+                    id="input-nome"
+                    v-model="form.dis_nome"
+                    type="text"
+                    placeholder="Informe o nome da disciplina"
+                    required/>
+            </b-form-group>
+
+            <b-form-group
+                id="input-group-curso"
+                label="Curso"
+                label-for="input-curso">
+                <b-form-input
+                    id="input-curso"
+                    v-model="form.dis_curso"
+                    type="text"
+                    placeholder="Informe o nome do curso"
+                    required/>
+            </b-form-group>
+
+            <b-form-group
+                id="input-group-periodo"
+                label="Período"
+                label-for="input-periodo">
+                <b-form-select
+                    id="input-periodo"
+                    v-model="form.dis_periodo"
+                    :options="periodos"
+                    required/>
+            </b-form-group>
+        <b-button variant="success" type="submit">Atualizar</b-button>
+    </b-form>
+</b-modal>

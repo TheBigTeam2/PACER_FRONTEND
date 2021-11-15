@@ -1,0 +1,54 @@
+<div id="professor-equipes">
+    <div class="content-header border-bottom">
+        <h1>Disciplinas</h1>
+    </div>
+    <div class="content py-3">
+        <b-row>
+            <b-col>
+                <app-adicionar-disciplina @disciplinaAdicionada="buscarDisciplinas"/>
+            </b-col>
+        </b-row>
+        <b-row class="mt-3">
+            <b-col>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Curso</th>
+                            <th>Período</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="disciplina in disciplinas">
+                            <td>{{disciplina.dis_nome}}</td>
+                            <td>{{disciplina.dis_curso}}</td>
+                            <td>{{periodos[disciplina.dis_periodo]}}</td>
+                            <td>
+                                <b-button variant="primary" @click="atualizarDisciplina(disciplina)">
+                                    <i class="fas fa-edit"></i>
+                                </b-button>
+                            </td>
+                            <td>
+                                <b-button variant="danger" @click="removerDisciplina(disciplina)">
+                                    <i class="fas fa-trash"></i>
+                                </b-button>
+                            </td>
+                        </tr>
+                        <tr v-if="disciplinas.length === 0">
+                            <td colspan="5" class="text-center">
+                                <span>Nenhuma disciplina cadastrada.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </b-col>
+        </b-row>
+    </div>
+    <app-atualizar-disciplina 
+        v-if="atualizar_disciplina" 
+        :disciplina="atualizar_disciplina" 
+        @removerSelecao="removerSelecao" 
+        @disciplinaAtualizada="buscarDisciplinas"/>
+</div>

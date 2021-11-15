@@ -37,6 +37,14 @@ export default {
           this.reiniciarFormulario()
           this.$emit('usuarioAdicionado')
         })
+        .catch((err) => {
+          console.log(err)
+          this.$swal.fire({
+            title: 'Erro!',
+            text: `Ocorreu um erro durante a adição do usuário`,
+            icon: 'error'
+          })
+        })
     },
     reiniciarFormulario () {
       this.form.cpf = null
