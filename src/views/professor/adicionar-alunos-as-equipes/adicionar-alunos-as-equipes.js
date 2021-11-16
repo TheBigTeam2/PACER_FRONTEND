@@ -25,7 +25,7 @@ export default {
         buscarDados () {
             Promise.all([this.buscarEquipes(), this.buscarAlunos()])
                 .then(res => {
-                    let equipes = res[0]
+                    let equipes = res[0].filter(equipe => equipe.equ_disciplina == this.disciplina)
                     let alunos = res[1]
                     
                     let alunosComEquipes = equipes.reduce((todosAlunos, equipe) => todosAlunos.concat(equipe.equ_alunos), [])

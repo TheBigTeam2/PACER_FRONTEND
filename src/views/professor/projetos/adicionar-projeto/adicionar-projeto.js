@@ -48,7 +48,12 @@ export default {
                 })
         },
         reiniciarForm () {
-            
+            this.form = {
+                pro_tema: null,
+                pro_inicio: null,
+                pro_termino: null,
+                pro_disciplinas: []
+            }
         }
     },
     created () {

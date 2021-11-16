@@ -11,20 +11,16 @@ export default {
         'app-box-equipe': BoxEquipe
     },
     data: () => ({
-        equipes: [],
-        disciplinas: [
-            {
-                id: 1,
-                nome: 'Algoritmos'
-            }
-        ],
+        disciplinas: [],
         equipe: null
     }),
     methods: {
         buscarEquipes () {
-            ProfessorService.buscarEquipes()
-                .then(res => res.data)
-                .then(data => this.equipes = data)
+            return new Promise(resolve => {
+                ProfessorService.buscarEquipes()
+                    .then(res => res.data)
+                    .then(data => resolve(data))
+            })
         },
         opcoesEquipe (equipe) {
             this.$swal.fire({
@@ -56,9 +52,33 @@ export default {
         },
         removerSelecao () {
             this.equipe = null
+        },
+        buscarDisciplinas() {
+            return new Promise(resolve => {
+                professorService
+                    .buscarDisciplinas()
+                    .then(res => res.data)
+                    .then(disciplinas => resolve(disciplinas.map(disciplina => ({
+                        id: disciplina.dis_id,
+                        nome: disciplina.dis_nome
+                    }))))
+            })
+        },
+        organizarEquipes() {
+            Promise.all([
+                this.buscarEquipes(),
+                this.buscarDisciplinas()
+            ]).then(res => {
+                let equipes = res[0]
+                let disciplinas = res[1]
+                disciplinas.map(disciplina => {
+                    disciplina.equipes = equipes.filter(equipe => equipe.equ_disciplina === disciplina.id)
+                })
+                this.disciplinas = disciplinas
+            })
         }
     },
     created () {
-        this.buscarEquipes()
+        this.organizarEquipes()
     }
 }

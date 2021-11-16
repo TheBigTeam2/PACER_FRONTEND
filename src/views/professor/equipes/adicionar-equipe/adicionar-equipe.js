@@ -7,11 +7,23 @@ export default {
             disciplina: null
         },
         disciplinas: [
-            { text: '-- Selecione uma disciplina --', value: null },
-            { text: 'Algoritmos', value: 1 }
+            { text: '-- Selecione uma disciplina --', value: null }
         ]
     }),
     methods: {
+        buscarDisciplinas() {
+            ProfessorService
+                .buscarDisciplinas()
+                .then(res => res.data)
+                .then(disciplinas => {
+                    this.disciplinas = [
+                        { text: '-- Selecione uma disciplina --', value: null }
+                    ].concat(disciplinas.map(disciplina => ({
+                        value: disciplina.dis_id,
+                        text: disciplina.dis_nome
+                    })))
+                })
+        },
         adicionarEquipe (e) {
             e.preventDefault()
             this.$swal.fire({
@@ -34,5 +46,8 @@ export default {
             this.form.nome = null
             this.form.disciplina = null
         }
+    },
+    created() {
+        this.buscarDisciplinas()
     }
 }

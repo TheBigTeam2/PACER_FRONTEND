@@ -1,11 +1,6 @@
 import ProfessorService from '../../../../services/professor.service'
 
 export default {
-  props: {
-    projetos: {
-      require: true
-    }
-  },
   data: () => ({
     form: {
       sprint: null,
@@ -14,7 +9,8 @@ export default {
       termino: null
     },
     mostrarAlerta: false,
-    mensagemAlerta: ''
+    mensagemAlerta: '',
+    projetos: []
   }),
   methods: {
     abrirPeriodoAvaliacao (e) {
@@ -34,7 +30,12 @@ export default {
           title: 'Abrindo novo período de avaliação, aguarde...'
         })
         this.$swal.showLoading()
-        ProfessorService.abrirAvaliacao(this.form)
+        ProfessorService.abrirAvaliacao({
+          ava_sprint: parseInt(this.form.sprint),
+          ava_projeto: this.form.projeto,
+          ava_inicio: this.form.inicio,
+          ava_termino: this.form.termino
+        })
           .then(res => {
             this.$swal.fire({
               title: 'Sucesso!',
@@ -46,7 +47,6 @@ export default {
           })
       }
     },
-
     reiniciarFormulario () {
       this.form = {
         sprint: null,
@@ -54,6 +54,42 @@ export default {
         inicio: null,
         termino: null
       }
+    },
+    buscarProjetos() {
+      return new Promise(resolve => {
+        ProfessorService
+          .buscarProjetos()
+          .then(res => res.data)
+          .then(projetos => resolve(projetos))
+      })
+    },
+    buscarDisciplinas() {
+      return new Promise(resolve => {
+        ProfessorService
+          .buscarDisciplinas()
+          .then(res => res.data)
+          .then(disciplinas => resolve(disciplinas))
+      })
+    },
+    filtrarProjetos() {
+      Promise.all([
+        this.buscarDisciplinas(),
+        this.buscarProjetos()
+      ]).then(res => {
+          let disciplinas = res[0]
+          let projetos = res[1]
+          this.projetos = projetos.filter(projeto => {
+            return disciplinas.filter(disciplina => {
+              return projeto.pro_disciplinas.filter(pd => pd.dis_id === disciplina.dis_id).length !== 0
+            }).length !== 0
+          }).map(projeto => ({
+            text: projeto.pro_tema,
+            value: projeto.pro_id
+          }))
+        })
     }
+  },
+  created() {
+    this.filtrarProjetos()
   }
 }
