@@ -1,0 +1,15 @@
+ <div class="mx-auto" style="width: 400px;">
+  <main class="">
+   <b-form @submit="login">
+    <h3>PACER</h3>    
+    <b-form-group id="input-group-user" label="Qual o seu CPF?" label-for="input-user">
+          <b-form-input id="input-user" v-model="user" type="text" placeholder="Informe seu CPF" required />
+        </b-form-group>
+      
+        <b-form-group id="input-group-password" label="Qual sua senha?" label-for="input-password">
+          <b-form-input id="input-password" v-model="password" type="password" placeholder="Informe sua senha" required />
+        </b-form-group>
+        <b-button block variant='success' type='submit'>Entrar</b-button>
+      </b-form>    
+  </main>
+</div>

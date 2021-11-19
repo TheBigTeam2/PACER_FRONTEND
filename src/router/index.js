@@ -11,6 +11,7 @@ import Equipe from '../views/admin/equipe/equipe.vue'
 import Equipes from '../views/professor/equipes/equipes.vue'
 import Projetos from '../views/professor/projetos/projetos.vue'
 import Disciplinas from '../views/professor/disciplinas/disciplinas.vue'
+import Login from '../views/login/login.vue'
 import adicionarAlunosAsEquipes from '../views/professor/adicionar-alunos-as-equipes/adicionar-alunos-as-equipes.vue'
 
 Vue.use(VueRouter)
@@ -89,6 +90,12 @@ const routes = [
         component: Disciplina
       }
     ]
+  },
+  {
+    path: '/',
+    name: 'Login',
+    component: Login,
+    children: []
   }
 ]
 

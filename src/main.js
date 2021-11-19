@@ -13,6 +13,10 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 // Vue Mask
 import VueMask from 'v-mask'
 
+// VueSelect
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
+
 // AdminLTE JS
 require('admin-lte/plugins/jquery/jquery.min.js')
 require('admin-lte/plugins/popper/popper.min.js')
@@ -30,10 +34,6 @@ Vue.use(VueSweetalert2)
 // Moment
 Vue.use(require('vue-moment'))
 Vue.use(VueMask)
-
-// VueSelect
-import vSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
 Vue.component('v-select', vSelect)
 
 Vue.config.productionTip = false
