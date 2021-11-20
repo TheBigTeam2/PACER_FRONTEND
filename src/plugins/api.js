@@ -8,9 +8,8 @@ const apiUrl = 'http://localhost:8085/'
 baseAPI.interceptors.request.use(
   function handleRequest (config) {
     const token = sessionStorage.getItem('token')
-    console.log(token)
     if (apiUrl) config.baseURL = apiUrl
-    if (token) config.headers.token = token
+    if (token !== 'null' && token !== undefined && token !== null) config.headers.token = token
     return config
   },
   function handleError (error) {

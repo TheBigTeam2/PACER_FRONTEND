@@ -3,67 +3,67 @@ import adicionarProjeto from './adicionar-projeto/adicionar-projeto.vue'
 import atualizarProjeto from './atualizar-projeto/atualizar-projeto.vue'
 
 export default {
-    components: {
-        'app-adicionar-projeto': adicionarProjeto,
-        'app-atualizar-projeto': atualizarProjeto
+  components: {
+    'app-adicionar-projeto': adicionarProjeto,
+    'app-atualizar-projeto': atualizarProjeto
+  },
+  data: () => ({
+    projetos: [],
+    periodos: [
+      'Manhã',
+      'Noite'
+    ],
+    projeto: null
+  }),
+  methods: {
+    buscarProjetos () {
+      professorService
+        .buscarProjetos()
+        .then(res => res.data)
+        .then(projetos => { this.projetos = projetos })
     },
-    data: () => ({
-        projetos: [],
-        periodos: [
-            'Manhã',
-            'Noite'
-        ],
-        projeto: null
-    }),
-    methods: {
-        buscarProjetos() {            
-            professorService
-                .buscarProjetos()
-                .then(res => res.data)
-                .then(projetos => this.projetos = projetos)
-        },
-        removerProjeto(projeto) {
-            this.$swal.fire({
-                title: 'Atenção!',
-                text: `Tem certeza que deseja remover o projeto ${projeto.pro_tema}?`,
-                denyButtonText: 'Não',
-                showDenyButton: true,
-                confirmButtonText: 'Sim'
-            }).then(e => {
-                if(e.isConfirmed) {
-                    this.$swal.fire({
-                        title: 'Removendo projeto, aguarde'
-                    })
-                    this.$swal.showLoading()
-                    professorService
-                        .removerProjeto(projeto.pro_id)
-                        .then(() => {
-                            this.$swal.fire({
-                                title: 'Sucesso!',
-                                text: `O projeto ${projeto.pro_tema} foi removido com sucesso.`,
-                                icon: 'success'
-                            })
-                            this.buscarProjetos()
-                        })
-                        .catch(err => {
-                            console.log(err)
-                            this.$swal.fire({
-                                title: 'Erro!',
-                                text: 'Ocorreu algum erro durante a remoção do projeto.',
-                                icon: 'error'
-                            })
-                        })
-                }
+    removerProjeto (projeto) {
+      this.$swal.fire({
+        title: 'Atenção!',
+        text: `Tem certeza que deseja remover o projeto ${projeto.pro_tema}?`,
+        denyButtonText: 'Não',
+        showDenyButton: true,
+        confirmButtonText: 'Sim'
+      }).then(e => {
+        if (e.isConfirmed) {
+          this.$swal.fire({
+            title: 'Removendo projeto, aguarde'
+          })
+          this.$swal.showLoading()
+          professorService
+            .removerProjeto(projeto.pro_id)
+            .then(() => {
+              this.$swal.fire({
+                title: 'Sucesso!',
+                text: `O projeto ${projeto.pro_tema} foi removido com sucesso.`,
+                icon: 'success'
+              })
+              this.buscarProjetos()
             })
-        },
-        atualizarProjeto(projeto) {
-            this.projeto = projeto
-        },
-        removerSelecao() {
-            this.projeto = null
+            .catch(err => {
+              console.log(err)
+              this.$swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu algum erro durante a remoção do projeto.',
+                icon: 'error'
+              })
+            })
         }
+      })
     },
-    created() {
-        this.buscarProjetos()
+    atualizarProjeto (projeto) {
+      this.projeto = projeto
+    },
+    removerSelecao () {
+      this.projeto = null
     }
+  },
+  created () {
+    this.buscarProjetos()
+  }
 }

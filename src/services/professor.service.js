@@ -3,9 +3,8 @@ import api from '../plugins/api'
 const idProfessor = 1
 
 class ProfessorService {
-
   abrirAvaliacao (dados) {
-    return api.post(`/avaliacao`, dados)
+    return api.post('/avaliacao', dados)
   }
 
   adicionarEquipe (dados) {
@@ -49,10 +48,10 @@ class ProfessorService {
   }
 
   buscarDisciplinas () {
-    api.post('/login', {
-      user: '29346390585',
-      password: 'mudar!@#'
-    }).then(res => console.log(res.data))
+    // api.post('/login', {
+    //   user: '29346390585',
+    //   password: 'mudar!@#'
+    // }).then(res => console.log(res.data))
     return api.get('/disciplinas')
   }
 

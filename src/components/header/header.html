@@ -1,0 +1,62 @@
+<header>
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+          <li class="nav-item">
+              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+      </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a :href="mainRoute" class="brand-link text-center">
+          <span class="brand-text font-weight-light">Pacer</span>
+      </a>
+  
+      <!-- Sidebar -->
+      <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+              <div class="image"></div>
+              <div class="info">
+                  <a href="#" class="d-block">{{ title }}</a>
+              </div>
+          </div>
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <div class="d-inline-flex justify-content-center align-items-center bg-white rounded-circle" style="height: 35px; width: 35px;">
+                    {{usuario.usu_nome[0]}}
+                </div>
+            </div>
+            <div class="info" :title="usuario.usu_nome">
+                <a href="#" class="d-block" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{usuario.usu_nome}}</a>
+            </div>
+            <div>
+                <b-button size="sm" @click="logout" variant="danger"> <i class="fa fa-power-off"></i></b-button>
+            </div>
+        </div>
+
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+              <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu">
+                  <li v-for="action in actions" :key="action.route" class="nav-item">
+                      <router-link :to="action.route" class="nav-link">
+                          <i :class="action.icon"></i>
+                          <p> {{ action.text }}</p>
+                      </router-link>
+                  </li>
+              </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+      </div>
+  <!-- /.sidebar -->
+  </aside>
+  <div id="sidebar-overlay" @click="esconderSidebar"></div>
+</header>

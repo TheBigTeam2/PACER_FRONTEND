@@ -1,11 +1,26 @@
 import LoginService from '../../services/login.service'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   data: () => ({
     user: '',
     password: ''
   }),
+  computed: {
+    ...mapState({
+      usuario: state => state.usuario
+    })
+  },
+  created () {
+    if (this.usuario != null && this.usuario.token != null) {
+      let route = this.usuario.usu_auth.toLowerCase()
+      if (route === 'administrador') { route = 'admin' }
+      sessionStorage.setItem('token', this.usuario.token)
+      this.$router.push('/' + route)
+    } else {
+      sessionStorage.setItem('token', null)
+    }
+  },
   methods: {
     ...mapActions(['atualizarUsuario']),
     login (e) {
