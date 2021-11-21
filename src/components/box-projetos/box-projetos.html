@@ -3,4 +3,7 @@
         <i class="fas fa-project-diagram"></i>
     </div>
     <p class="text-center py-2 m-0">{{ projeto.pro_tema }}</p>
+    <div v-if="mostrarDisciplina">
+        <small class="d-block text-center" v-for="disciplina in projeto.pro_disciplinas">{{ disciplina.dis_nome }}</small>
+    </div>
 </div>

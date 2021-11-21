@@ -1,5 +1,5 @@
 export default {
-    props: ['projeto'],
+    props: ['projeto', 'mostrarDisciplina'],
     methods: {
         clickBox () {
             this.$emit('clickBox', this.$props.projeto)

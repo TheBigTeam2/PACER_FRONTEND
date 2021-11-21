@@ -7,6 +7,10 @@ class ProfessorService {
     return api.post('/avaliacao', dados)
   }
 
+  buscarEquipesDoProjeto (projeto) {
+    return api.get('/equipes?projeto=' + projeto)
+  }
+
   adicionarEquipe (dados) {
     return api.post('/equipe', dados)
   }
@@ -48,10 +52,6 @@ class ProfessorService {
   }
 
   buscarDisciplinas () {
-    // api.post('/login', {
-    //   user: '29346390585',
-    //   password: 'mudar!@#'
-    // }).then(res => console.log(res.data))
     return api.get('/disciplinas')
   }
 

@@ -12,7 +12,9 @@
             </b-col>
         </b-row>
         <b-row class="py-3">
-            
+            <b-col cols="6" md="4" lg="3" xl="2" v-for="projeto in projetos">
+                <app-box-projeto :projeto="projeto" :mostrarDisciplina="true" @clickBox="abrirProjeto"/>
+            </b-col>
         </b-row>
     </div>
 </div>

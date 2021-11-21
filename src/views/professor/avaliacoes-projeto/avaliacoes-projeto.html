@@ -1,0 +1,12 @@
+<div id="professor-avaliacoes">
+    <div class="content-header border-bottom">
+        <h1>Avaliações</h1>
+    </div>
+    <div class="content py-3">
+        <b-row class="py-3">
+            <b-col cols="6" md="4" lg="3" xl="2" v-for="equipe in equipes">
+                <app-box-equipe :equipe="equipe" @clickBox="detalharEquipe"/>
+            </b-col>
+        </b-row>
+    </div>
+</div>
