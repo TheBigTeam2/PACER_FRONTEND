@@ -1,6 +1,12 @@
+import { mapState } from 'vuex'
 import ProfessorService from '../../../../services/professor.service'
 
 export default {
+    computed: {
+        ...mapState({
+            usuario: state => state.usuario
+        })
+    },
     data: () => ({
         form: {
             nome: null,
@@ -18,7 +24,7 @@ export default {
                 .then(disciplinas => {
                     this.disciplinas = [
                         { text: '-- Selecione uma disciplina --', value: null }
-                    ].concat(disciplinas.map(disciplina => ({
+                    ].concat(disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).map(disciplina => ({
                         value: disciplina.dis_id,
                         text: disciplina.dis_nome
                     })))

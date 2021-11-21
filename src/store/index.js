@@ -13,10 +13,7 @@ const vuexPersist = new VuexPersistence({
 export default new Vuex.Store({
   strict: true, // This makes the Vuex store strict
   state: {
-    usuario: {
-      usu_id: 1,
-      usu_nome: 'Walmir'
-    }
+    usuario: null
   },
   mutations: {
     atualizarUsuario (state, usuario) {

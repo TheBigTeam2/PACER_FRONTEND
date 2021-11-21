@@ -1,6 +1,12 @@
+import { mapState } from 'vuex'
 import ProfessorService from '../../../../services/professor.service'
 
 export default {
+  computed: {
+    ...mapState({
+      usuario: state => state.usuario
+    })
+  },
   data: () => ({
     form: {
       sprint: null,
@@ -60,7 +66,7 @@ export default {
         ProfessorService
           .buscarProjetos()
           .then(res => res.data)
-          .then(projetos => resolve(projetos))
+          .then(projetos => resolve(projetos.filter(projeto => projeto.pro_disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1)))
       })
     },
     buscarDisciplinas() {

@@ -3,8 +3,14 @@ import AtualizarEquipe from './atualizar-equipe/atualizar-equipe.vue'
 import BoxEquipe from '../../../components/box-equipe/box-equipe.vue'
 import ProfessorService from '../../../services/professor.service'
 import professorService from '../../../services/professor.service'
+import { mapState } from 'vuex'
 
 export default {
+    computed: {
+        ...mapState({
+            usuario: state => state.usuario
+        })
+    },
     components: {
         'app-adicionar-equipe': AdicionarEquipe,
         'app-atualizar-equipe': AtualizarEquipe,
@@ -58,7 +64,7 @@ export default {
                 professorService
                     .buscarDisciplinas()
                     .then(res => res.data)
-                    .then(disciplinas => resolve(disciplinas.map(disciplina => ({
+                    .then(disciplinas => resolve(disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).map(disciplina => ({
                         id: disciplina.dis_id,
                         nome: disciplina.dis_nome
                     }))))

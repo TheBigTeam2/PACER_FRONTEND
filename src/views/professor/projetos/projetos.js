@@ -1,8 +1,14 @@
 import professorService from '@/services/professor.service'
+import { mapState } from 'vuex'
 import adicionarProjeto from './adicionar-projeto/adicionar-projeto.vue'
 import atualizarProjeto from './atualizar-projeto/atualizar-projeto.vue'
 
 export default {
+  computed: {
+    ...mapState({
+      usuario: state => state.usuario
+    })
+  },
   components: {
     'app-adicionar-projeto': adicionarProjeto,
     'app-atualizar-projeto': atualizarProjeto
@@ -20,7 +26,9 @@ export default {
       professorService
         .buscarProjetos()
         .then(res => res.data)
-        .then(projetos => { this.projetos = projetos })
+        .then(projetos => { 
+          this.projetos = projetos.filter(projeto => projeto.pro_disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1)
+        })
     },
     removerProjeto (projeto) {
       this.$swal.fire({

@@ -1,8 +1,14 @@
 import professorService from '@/services/professor.service'
+import { mapState } from 'vuex'
 import adicionarDisciplina from './adicionar-disciplina/adicionar-disciplina.vue'
 import atualizarDisciplina from './atualizar-disciplina/atualizar-disciplina.vue'
 
 export default {
+    computed: {
+        ...mapState({
+            usuario: state => state.usuario
+        })
+    },
     components: {
         'app-adicionar-disciplina': adicionarDisciplina,
         'app-atualizar-disciplina': atualizarDisciplina
@@ -20,7 +26,7 @@ export default {
             professorService
                 .buscarDisciplinas()
                 .then(res => res.data)
-                .then(disciplinas => this.disciplinas = disciplinas)
+                .then(disciplinas => this.disciplinas = disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id))
         },
         atualizarDisciplina(disciplina) {
             this.atualizar_disciplina = disciplina
