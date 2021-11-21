@@ -2,8 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Professor from '../views/professor/professor.vue'
 import Avaliacoes from '../views/professor/avaliacoes/avaliacoes.vue'
+
 import Aluno from '../views/aluno/aluno.vue'
 import AvaliacoesAluno from '../views/aluno/avaliacoes/avaliacoes.vue'
+import EquipesAluno from '../views/aluno/equipes/equipes.vue'
+
 import Admin from '../views/admin/admin.vue'
 import Usuario from '../views/admin/usuario/usuario.vue'
 import Disciplina from '../views/admin/disciplina/disciplina.vue'
@@ -66,6 +69,11 @@ const routes = [
         path: '/aluno/avaliacoes',
         name: 'Aluno Avaliacoes',
         component: AvaliacoesAluno
+      },
+      {
+        path: '/aluno/equipes',
+        name: 'Aluno Equipes',
+        component: EquipesAluno
       }
     ]
   },

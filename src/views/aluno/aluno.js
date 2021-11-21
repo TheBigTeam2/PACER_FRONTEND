@@ -9,6 +9,10 @@ export default {
       icon: 'nav-icon fas fa-clipboard',
       text: 'Avaliações',
       route: '/aluno/avaliacoes'
+    }, {
+      icon: 'nav-icon fas fa-users',
+      text: 'Equipes',
+      route: '/aluno/equipes'
     }]
   })
 }

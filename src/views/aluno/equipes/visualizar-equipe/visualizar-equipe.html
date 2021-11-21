@@ -1,0 +1,26 @@
+<b-modal title="Visualizar Equipe" :visible="true" @hidden="removerSelecao" hide-footer>
+    <p>
+        <strong>Disciplina:</strong> {{equipe.equ_disciplina.dis_nome}}
+    </p>
+    <p>
+        <strong>Curso:</strong> {{equipe.equ_disciplina.dis_curso}}
+    </p>
+    <p>
+        <strong>Periodo:</strong> {{periodos[equipe.equ_disciplina.dis_periodo]}}
+    </p>
+    <p>
+        <strong>Alunos:</strong>
+        <b-list-group>
+            <b-list-group-item v-for="aluno in equipe.equ_alunos">{{aluno.usu_nome}} {{aluno.usu_id === usuario.usu_id ? '(eu)' : ''}}</b-list-group-item>
+        </b-list-group>
+    </p>
+    <p>
+        <strong>Projetos:</strong>
+        <b-list-group>
+            <b-list-group-item v-for="projeto in projetos" class="d-flex justify-content-between align-items-center">
+                {{projeto.pro_tema}} 
+                <b-button :variant="projeto.incluso ? 'danger' : 'primary'" size="sm" @click="adicionarEquipeProjeto(projeto.incluso, projeto.pro_id)">{{ projeto.incluso ? 'Remover participação' : 'Participar'}}</b-button>
+            </b-list-group-item>
+        </b-list-group>
+    </p>
+</b-modal>
