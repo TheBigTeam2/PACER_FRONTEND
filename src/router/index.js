@@ -18,6 +18,7 @@ import Disciplinas from '../views/professor/disciplinas/disciplinas.vue'
 import Login from '../views/login/login.vue'
 import adicionarAlunosAsEquipes from '../views/professor/adicionar-alunos-as-equipes/adicionar-alunos-as-equipes.vue'
 import avaliacoesProjeto from '../views/professor/avaliacoes-projeto/avaliacoes-projeto.vue'
+import avaliacoesProjetoEquipe from '../views/professor/avaliacoes-projeto-equipe/avaliacoes-projeto-equipe.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
         path: '/professor/avaliacoes/:projeto',
         name: 'Professor Avaliacoes Projeto',
         component: avaliacoesProjeto
+      },
+      {
+        path: '/professor/avaliacoes/:projeto/:equipe',
+        name: 'Professor Avaliacoes Projeto Equipe',
+        component: avaliacoesProjetoEquipe
       },
       {
         path: '/professor/equipes',

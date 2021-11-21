@@ -1,0 +1,13 @@
+<div id="professor-avaliacoes">
+    <div class="content-header border-bottom">
+        <h1>Avaliações</h1>
+    </div>
+    <div class="content py-3">
+        <b-row class="py-3">
+            <b-col cols="6" md="4" lg="3" xl="2" v-for="aluno in alunos">
+                <app-box-usuario :usuario="aluno" @clickBox="relatorioAluno"/>
+            </b-col>
+        </b-row>
+    </div>
+    <app-relatorio-usuario v-if="aluno" :aluno="aluno" :avaliacoes="avaliacoes" @removerSelecao="removerSelecao"/>
+</div>

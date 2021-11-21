@@ -8,7 +8,11 @@ class ProfessorService {
   }
 
   buscarEquipesDoProjeto (projeto) {
-    return api.get('/equipes?projeto=' + projeto)
+    return api.get('/equipe?projeto=' + projeto)
+  }
+
+  buscarAvaliacoes (projeto) {
+    return api.get('/equipe?projeto=' + projeto)
   }
 
   adicionarEquipe (dados) {
