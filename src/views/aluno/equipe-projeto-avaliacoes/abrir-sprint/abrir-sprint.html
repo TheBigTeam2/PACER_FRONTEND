@@ -1,0 +1,29 @@
+<b-modal :visible="true" title="Visualizar sprint" @hidden="removerSelecao" hide-footer>
+    <b-row v-for="(avaliacao, i) in sprint">
+        <b-col cols="12" class="border rounded py-2 px-3 mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+                {{buscarAluno(avaliacao.ava_avaliado)}}
+                <b-button v-if="avaliacao.ava_notas.length == 0" v-b-toggle="'avaliacao-' + i" size="sm" variant="primary">Avaliar</b-button>
+                <b-button v-else size="sm" disabled>Avaliado</b-button>
+            </div>
+            
+            <b-collapse v-if="avaliacao.ava_notas.length == 0" :id="'avaliacao-' + i" class="mt-2">
+                <b-form @submit="enviarNotas($event, i)" v-if="forms[i]">
+                    <b-form-group
+                        v-for="(campo, j) in forms[i].notas"
+                        id="input-group-1"
+                        :label="campo.criterio.cri_nome"
+                        :label-for="'input-' + (i * j)">
+                        <b-form-input
+                            :id="'input-' + (i * j)"
+                            v-model="campo.nota"
+                            type="number"
+                            min="0"
+                            required/>
+                    </b-form-group>
+                    <b-button type="submit" variant="success">Enviar Notas</b-button>
+                </b-form>
+            </b-collapse>
+        </b-col>
+    </b-row>
+</b-modal>

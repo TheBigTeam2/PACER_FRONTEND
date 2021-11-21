@@ -48,7 +48,7 @@ export default {
                                 text: 'Equipe removida com sucesso.',
                                 icon: 'success'
                             })
-                            this.buscarEquipes()
+                            this.organizarEquipes()
                         })
                 }
                 else if (res.isConfirmed) {

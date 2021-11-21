@@ -1,39 +1,18 @@
-<div id="professor-avaliacoes">
+<div id="aluno-avaliacoes">
     <div class="content-header border-bottom">
         <h1>Avaliações</h1>
     </div>
-    <div class="content py-3">
-        <b-row class="py-3">
-            <b-col>
-                <div class="accordion" role="tablist" v-for="projeto in projetos">
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <b-button block v-b-toggle="'Projeto-' + projeto.id" variant="info">Projeto {{ projeto.id }}</b-button>
-                        </b-card-header>
-                        <b-collapse :id="'Projeto-' + projeto.id" accordion="accordion-projeto" role="tabpanel">
-                            <b-card-body>
-                                <div class="accordion" role="tablist" v-for="(avaliacoes, sprint) in projeto.avaliacoes">
-                                    <b-card no-body class="mb-1">
-                                        <b-card-header header-tag="header" class="p-1" role="tab">
-                                            <b-button block v-b-toggle="'Sprint-' + sprint + '-' + projeto.id" variant="info">Sprint {{ sprint }}</b-button>
-                                        </b-card-header>
-                                        <b-collapse :id="'Sprint-' + sprint + '-' + projeto.id" accordion="accordion-sprint" role="tabpanel">
-                                            <b-card-body>
-                                                <b-list-group>
-                                                    <b-list-group-item v-for="avaliacao in avaliacoes" button @click="avaliar(avaliacao)" title="Fazer avaliação">
-                                                        {{ avaliacao.avaliado == idAluno ? 'Autoavaliação' : 'Avaliar o aluno ' + avaliacao.avaliado }}
-                                                    </b-list-group-item>
-                                                </b-list-group>
-                                            </b-card-body>
-                                        </b-collapse>
-                                    </b-card>
-                                </div>
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                </div>
-            </b-col>
-        </b-row>
-    </div>
-    <app-atribuir-nota :avaliacao="avaliacaoSelecionada" @removerSelecao="removerSelecao" @avaliacaoEnviada="avaliacaoEnviada"/>
+    <b-row class="mt-3" v-for="equipe in equipes">
+        <div class="content-header w-100 d-flex border-bottom pb-2 mb-3">
+            <h1 class="mr-3">{{equipe.equ_nome}} - {{equipe.equ_disciplina.dis_nome}}</h1>
+        </div>
+        <b-col>
+            <h4>Projetos</h4>
+            <b-row>
+                <b-col cols="2" v-for="projeto in equipe.projetos">
+                    <app-box-projeto :projeto="projeto" @clickBox="visualizarProjeto($event, equipe)"/>
+                </b-col>
+            </b-row>
+        </b-col>
+    </b-row>
 </div>

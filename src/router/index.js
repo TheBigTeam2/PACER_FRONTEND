@@ -6,6 +6,7 @@ import Avaliacoes from '../views/professor/avaliacoes/avaliacoes.vue'
 import Aluno from '../views/aluno/aluno.vue'
 import AvaliacoesAluno from '../views/aluno/avaliacoes/avaliacoes.vue'
 import EquipesAluno from '../views/aluno/equipes/equipes.vue'
+import EquipeProjetoAvaliacoes from '../views/aluno/equipe-projeto-avaliacoes/equipe-projeto-avaliacoes.vue'
 
 import Admin from '../views/admin/admin.vue'
 import Usuario from '../views/admin/usuario/usuario.vue'
@@ -74,6 +75,11 @@ const routes = [
         path: '/aluno/equipes',
         name: 'Aluno Equipes',
         component: EquipesAluno
+      },
+      {
+        path: '/aluno/avaliacoes/:equipe/:projeto',
+        name: 'Aluno Equipe Projeto Avaliacoes',
+        component: EquipeProjetoAvaliacoes
       }
     ]
   },

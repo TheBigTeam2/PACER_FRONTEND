@@ -1,10 +1,6 @@
 import api from '../plugins/api'
 
 class AlunoService {
-  enviarAvaliacao (dados, id) {
-    return api.post(`/aluno/${id}/nota`, dados)
-  }
-
   buscarEquipes (id) {
     return api.get('/equipe_aluno?aluno=' + id)
   }
@@ -30,6 +26,18 @@ class AlunoService {
 
   removerEquipeProjeto(idProjeto, idEquipe) {
     return api.delete(`/projeto_equipe?projeto=${idProjeto}&equipe=${idEquipe}`)
+  }
+
+  buscarAvaliacoes(idUsuario) {
+    return api.get(`/avaliacao?avaliador=${idUsuario}`)
+  }
+
+  buscarCriterios() {
+    return api.get('/criterios')
+  }
+
+  enviarNotas(dados) {
+    return api.post('/nota', dados)
   }
 }
 

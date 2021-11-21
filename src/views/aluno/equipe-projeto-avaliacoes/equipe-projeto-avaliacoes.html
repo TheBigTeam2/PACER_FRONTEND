@@ -1,0 +1,37 @@
+<div id="aluno-equipe-projeto-avaliacoes">
+    <div class="content-header border-bottom">
+        <h1>Avaliações</h1>
+    </div>
+    <div class="mt-3" v-if="projeto">
+        <b-row>
+            <b-col cols="12">
+                <b-list-group>
+                    <b-list-group-item>Projeto: {{projeto.pro_tema}}</b-list-group-item>
+                    <b-list-group-item>Início: {{projeto.pro_inicio | moment('DD/MM/YYYY')}}</b-list-group-item>
+                    <b-list-group-item>Término: {{projeto.pro_termino | moment('DD/MM/YYYY')}}</b-list-group-item>
+                    <b-list-group-item>Disciplinas
+                        <b-list-group class="mt-2">
+                            <b-list-group-item v-for="disciplina in projeto.pro_disciplinas">{{disciplina.dis_nome}}</b-list-group-item>
+                        </b-list-group>
+                    </b-list-group-item>
+                    <b-list-group-item>Equipe
+                        <b-list-group class="mt-2">
+                            <b-list-group-item>Nome: {{equipe.equ_nome}}</b-list-group-item>
+                            <b-list-group-item>Integrantes
+                                <b-list-group class="mt-2">
+                                    <b-list-group-item v-for="aluno in equipe.equ_alunos">{{aluno.usu_nome}} {{aluno.usu_id == usuario.usu_id ? '(eu)' : ''}}</b-list-group-item>
+                                </b-list-group>
+                            </b-list-group-item>
+                        </b-list-group>
+                    </b-list-group-item>
+                </b-list-group>
+            </b-col>
+        </b-row>
+        <b-row class="mt-3">
+            <b-col cols="6" md="4" lg="3" xl="2" v-for="(sprint, i) in sprints">
+                <app-box-sprint :sprint="i" @click="abrirSprint"/>
+            </b-col>
+        </b-row>
+    </div>
+    <app-abrir-sprint v-if="sprint" @notasEnviadas="atualizarDados" :alunos="equipe.equ_alunos" :sprint="sprint" @removerSelecao="removerSelecao"/>
+</div>

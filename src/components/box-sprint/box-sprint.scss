@@ -1,0 +1,21 @@
+.box-sprint {
+    cursor: pointer;
+    background: #FFF;
+    position: relative;
+    top: 0;
+    transition: top 200ms;
+
+    &:hover {
+        top: -5px;
+    }
+
+    .image-icon {
+        width: 100px;
+        height: 100px;
+        background: #FFF;
+    
+        * {
+            font-size: 40px;
+        }
+    }
+}

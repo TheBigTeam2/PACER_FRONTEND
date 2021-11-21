@@ -61,7 +61,7 @@ export default {
                 alunoService
                     .removerEquipeProjeto(idProjeto, this.equipe.equ_id)
                     .then(res => res.data)
-                    .then(data => {
+                    .then(() => {
                         this.$swal.fire({
                             title: 'Sucesso!',
                             text: 'Equipe foi removida com sucesso.',
@@ -77,7 +77,7 @@ export default {
                 alunoService
                     .adicionarEquipeProjeto(idProjeto, this.equipe.equ_id)
                     .then(res => res.data)
-                    .then(data => {
+                    .then(() => {
                         this.$swal.fire({
                             title: 'Sucesso!',
                             text: 'Equipe foi adicionada com sucesso.',
