@@ -23,7 +23,7 @@ export default {
         confirmButtonText: 'Sim'
       }).then(e => {
         if (e.isConfirmed) {
-          this.atualizarUsuario(null)
+          this.atualizarUsuario({ usu_nome: 'a' })
           this.$router.push('/')
         }
       })

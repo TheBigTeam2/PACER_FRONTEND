@@ -20,6 +20,8 @@ import adicionarAlunosAsEquipes from '../views/professor/adicionar-alunos-as-equ
 import avaliacoesProjeto from '../views/professor/avaliacoes-projeto/avaliacoes-projeto.vue'
 import avaliacoesProjetoEquipe from '../views/professor/avaliacoes-projeto-equipe/avaliacoes-projeto-equipe.vue'
 
+import store from '../store/index'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -35,37 +37,58 @@ const routes = [
       {
         path: '/professor/avaliacoes',
         name: 'Professor Avaliacoes',
-        component: Avaliacoes
+        component: Avaliacoes,
+        meta: {
+          auth: 'Professor'
+        }
       },
       {
         path: '/professor/avaliacoes/:projeto',
         name: 'Professor Avaliacoes Projeto',
-        component: avaliacoesProjeto
+        component: avaliacoesProjeto,
+        meta: {
+          auth: 'Professor'
+        }
       },
       {
         path: '/professor/avaliacoes/:projeto/:equipe',
         name: 'Professor Avaliacoes Projeto Equipe',
-        component: avaliacoesProjetoEquipe
+        component: avaliacoesProjetoEquipe,
+        meta: {
+          auth: 'Professor'
+        }
       },
       {
         path: '/professor/equipes',
         name: 'Professor Equipes',
-        component: Equipes
+        component: Equipes,
+        meta: {
+          auth: 'Professor'
+        }
       },
       {
         path: '/professor/equipe/:disciplina',
         name: 'Professor Equipes',
-        component: adicionarAlunosAsEquipes
+        component: adicionarAlunosAsEquipes,
+        meta: {
+          auth: 'Professor'
+        }
       },
       {
         path: '/professor/projetos',
         name: 'Professor Projetos',
-        component: Projetos
+        component: Projetos,
+        meta: {
+          auth: 'Professor'
+        }
       },
       {
         path: '/professor/disciplinas',
         name: 'Professor Disciplinas',
-        component: Disciplinas
+        component: Disciplinas,
+        meta: {
+          auth: 'Professor'
+        }
       }
     ]
   },
@@ -77,21 +100,31 @@ const routes = [
       {
         path: '/',
         redirect: './avaliacoes'
+
       },
       {
         path: '/aluno/avaliacoes',
         name: 'Aluno Avaliacoes',
-        component: AvaliacoesAluno
+        component: AvaliacoesAluno,
+        meta: {
+          auth: 'Aluno'
+        }
       },
       {
         path: '/aluno/equipes',
         name: 'Aluno Equipes',
-        component: EquipesAluno
+        component: EquipesAluno,
+        meta: {
+          auth: 'Aluno'
+        }
       },
       {
         path: '/aluno/avaliacoes/:equipe/:projeto',
         name: 'Aluno Equipe Projeto Avaliacoes',
-        component: EquipeProjetoAvaliacoes
+        component: EquipeProjetoAvaliacoes,
+        meta: {
+          auth: 'Aluno'
+        }
       }
     ]
   },
@@ -103,17 +136,26 @@ const routes = [
       {
         path: '/admin/usuario',
         name: 'Administrador Usuários',
-        component: Usuario
+        component: Usuario,
+        meta: {
+          auth: 'Administrador'
+        }
       },
       {
         path: '/admin/equipe',
         name: 'Administrador Equipes',
-        component: Equipe
+        component: Equipe,
+        meta: {
+          auth: 'Administrador'
+        }
       },
       {
         path: '/admin/disciplina',
         name: 'Administrador Disciplinas',
-        component: Disciplina
+        component: Disciplina,
+        meta: {
+          auth: 'Administrador'
+        }
       }
     ]
   },
@@ -130,6 +172,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   linkActiveClass: 'active'
+})
+
+router.beforeEach(async (to, _from, next) => {
+  if (to.meta.auth == null || to.meta.auth === store.state.usuario?.usu_auth) {
+    next()
+  } else {
+    next({ path: '/' })
+  }
 })
 
 export default router

@@ -1,7 +1,5 @@
 import api from '../plugins/api'
 
-const idProfessor = 1
-
 class ProfessorService {
   abrirAvaliacao (dados) {
     return api.post('/avaliacao', dados)
