@@ -175,7 +175,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, _from, next) => {
-  if (to.meta.auth == null || to.meta.auth === store.state.usuario?.usu_auth) {
+  if (to.meta.auth == null || to.meta.auth === store.state.usuario?.usu_auth || store.state.usuario?.usu_auth === 'Administrador') {
     next()
   } else {
     next({ path: '/' })
