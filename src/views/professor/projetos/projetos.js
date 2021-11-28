@@ -27,7 +27,7 @@ export default {
         .buscarProjetos()
         .then(res => res.data)
         .then(projetos => { 
-          this.projetos = projetos.filter(projeto => projeto.pro_disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1)
+          this.projetos = projetos.filter(projeto => projeto.disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1)
         })
     },
     removerProjeto (projeto) {

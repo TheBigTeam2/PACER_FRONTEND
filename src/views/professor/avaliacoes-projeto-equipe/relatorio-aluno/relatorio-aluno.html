@@ -1,3 +1,7 @@
-<b-modal :visible="true" :title="'Relatório do Aluno ' + aluno.usu_nome" @hidden="$emit('removerSelecao')">
-    <pre>{{avaliacoes}}</pre>
+<b-modal :visible="true" :title="'Relatório do Aluno ' + aluno.usu_nome" @hidden="$emit('removerSelecao')" size="xl" hide-footer>
+    <b-row v-if="relatorios">
+        <b-col cols="6" v-for="(relatorio, i) in relatorios">
+            <app-radar :data="relatorio.data" :options="relatorio.options" :i="i"/>
+        </b-col>
+    </b-row>
 </b-modal>

@@ -25,7 +25,7 @@
                         <tr v-for="projeto in projetos">
                             <td>{{projeto.pro_tema}}</td>
                             <td>
-                                <span class="d-block" v-for="disciplina in projeto.pro_disciplinas">{{disciplina.dis_nome}} - {{disciplina.dis_curso}} - {{periodos[disciplina.dis_periodo]}}</span>
+                                <span class="d-block" v-for="disciplina in projeto.disciplinas">{{disciplina.dis_nome}} - {{disciplina.dis_curso}} - {{periodos[disciplina.dis_periodo]}}</span>
                             </td>
                             <td>{{projeto.pro_inicio | moment('DD/MM/YYYY')}}</td>
                             <td>{{projeto.pro_termino | moment('DD/MM/YYYY')}}</td>

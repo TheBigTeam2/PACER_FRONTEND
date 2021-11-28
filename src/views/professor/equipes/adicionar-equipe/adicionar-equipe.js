@@ -36,12 +36,15 @@ export default {
                 title: 'Enviando dados da nova equipe, aguarde...'
             })
             this.$swal.showLoading()
-            ProfessorService.adicionarEquipe(this.form)
+            ProfessorService.adicionarEquipe({
+                equ_nome: this.form.nome,
+                equ_disciplina: this.form.disciplina
+            })
                 .then((res) => res.data)
                 .then((data) => {
                     this.$swal.fire({
                         title: 'Sucesso!',
-                        text: `A equipe "${ data.inserted_content.nome }" foi adicionada`,
+                        text: `A equipe "${ data.inserted_content.equ_nome }" foi adicionada`,
                         icon: 'success'
                     })
                     this.reiniciarForm()

@@ -2,6 +2,7 @@ import { mapState } from 'vuex'
 import professorService from '../../../services/professor.service'
 import BoxUsuario from '@/components/box-usuario/box-usuario.vue'
 import relatorioAluno from './relatorio-aluno/relatorio-aluno.vue'
+import lancarNota from './lancar-nota/lancar-nota.vue'
 
 export default {
   computed: {
@@ -11,14 +12,16 @@ export default {
   },
   components: {
     'app-box-usuario': BoxUsuario,
-    'app-relatorio-usuario': relatorioAluno
+    'app-relatorio-usuario': relatorioAluno,
+    'app-lancar-nota': lancarNota
   },
   data: () => ({
     alunos: [],
     avaliacoes: [],
     projeto_id: null,
     equipe_id: null,
-    aluno: null
+    aluno: null,
+    lancarNota: false
   }),
   methods: {
     buscarAlunos ({projeto, equipe}) {
@@ -30,33 +33,6 @@ export default {
         .then(res => res.data)
         .then(equipes => this.alunos = equipes.filter(equipe => equipe.equ_id == this.equipe_id)[0].equ_alunos)
     },
-    buscarAvaliacoes ({projeto, equipe}) {
-      return new Promise(resolve => {
-        professorService
-          .buscarAvaliacoes(projeto)
-          .then(res => res.data)
-          .then(avaliacoes => {
-            resolve(avaliacoes.filter(avaliacao => avaliacao.equ_id == equipe)[0].equ_alunos)
-          })
-      })
-    },
-    buscarCriterios () {
-      return new Promise(resolve => {
-        professorService
-          .buscarCriterios()
-          .then(res => res.data)
-          .then(criterios => resolve(criterios))
-      })
-    },
-    calcularDados () {
-      Promise.all([
-        this.buscarAvaliacoes(this.$router.currentRoute.params),
-        this.buscarCriterios()
-      ]).then(([alunosAvaliacoes, criterios]) => {
-        this.avaliacoes = []
-        console.log(alunosAvaliacoes)
-      })
-    },
     relatorioAluno(aluno) {
       this.aluno = aluno
     },
@@ -66,6 +42,6 @@ export default {
   },
   created () {
     this.buscarAlunos(this.$router.currentRoute.params)
-    this.calcularDados()
+    this.projeto_id = this.$router.currentRoute.params.projeto
   }
 }

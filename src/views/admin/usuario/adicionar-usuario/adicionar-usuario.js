@@ -31,7 +31,7 @@ export default {
         .then(data => {
           this.$swal.fire({
             title: 'Sucesso!',
-            text: `O usuário ${data.inserted_content.nome} foi adicionado com sucesso.`,
+            text: `O usuário ${data.inserted_content.usu_nome} foi adicionado com sucesso.`,
             icon: 'success'
           })
           this.reiniciarFormulario()

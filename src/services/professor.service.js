@@ -84,6 +84,18 @@ class ProfessorService {
   atualizarProjeto (id, dados) {
     return api.put('/projeto?id=' + id, dados)
   }
+
+  buscarRelatorio (projeto, aluno) {
+    return api.get(`/report/general?id_projeto=${projeto}&id_aluno=${aluno}`)
+  }
+
+  buscarSprints (projeto) {
+    return api.get('/buscar_sprints_do_projeto?projeto=' + projeto)
+  }
+
+  lancarNota (dados) {
+    return api.post('/avaliacao_prof', dados)
+  }
 }
 
 export default new ProfessorService()

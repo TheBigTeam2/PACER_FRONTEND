@@ -142,17 +142,57 @@ const routes = [
         }
       },
       {
-        path: '/admin/equipe',
-        name: 'Administrador Equipes',
-        component: Equipe,
+        path: '/admin/avaliacoes',
+        name: 'Administrador Avaliacoes',
+        component: Avaliacoes,
         meta: {
           auth: 'Administrador'
         }
       },
       {
-        path: '/admin/disciplina',
+        path: '/admin/avaliacoes/:projeto',
+        name: 'Administrador Avaliacoes Projeto',
+        component: avaliacoesProjeto,
+        meta: {
+          auth: 'Administrador'
+        }
+      },
+      {
+        path: '/admin/avaliacoes/:projeto/:equipe',
+        name: 'Administrador Avaliacoes Projeto Equipe',
+        component: avaliacoesProjetoEquipe,
+        meta: {
+          auth: 'Administrador'
+        }
+      },
+      {
+        path: '/admin/equipes',
+        name: 'Administrador Equipes',
+        component: Equipes,
+        meta: {
+          auth: 'Administrador'
+        }
+      },
+      {
+        path: '/admin/equipe/:disciplina',
+        name: 'Administrador Equipes',
+        component: adicionarAlunosAsEquipes,
+        meta: {
+          auth: 'Administrador'
+        }
+      },
+      {
+        path: '/admin/projetos',
+        name: 'Administrador Projetos',
+        component: Projetos,
+        meta: {
+          auth: 'Administrador'
+        }
+      },
+      {
+        path: '/admin/disciplinas',
         name: 'Administrador Disciplinas',
-        component: Disciplina,
+        component: Disciplinas,
         meta: {
           auth: 'Administrador'
         }

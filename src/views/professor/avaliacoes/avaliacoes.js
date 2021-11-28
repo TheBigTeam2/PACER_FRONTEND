@@ -23,7 +23,7 @@ export default {
       professorService
         .buscarProjetos()
         .then(res => res.data)
-        .then(projetos => this.projetos = projetos.filter(projeto => projeto.pro_disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1))
+        .then(projetos => this.projetos = projetos.filter(projeto => projeto.disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1))
     },
     abrirProjeto (projeto) {
       this.$router.push('/professor/avaliacoes/' + projeto.pro_id)

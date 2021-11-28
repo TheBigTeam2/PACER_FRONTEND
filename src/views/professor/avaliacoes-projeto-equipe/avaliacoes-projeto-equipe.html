@@ -4,10 +4,16 @@
     </div>
     <div class="content py-3">
         <b-row class="py-3">
+            <b-col>
+                <b-button @click="lancarNota = true" variant="primary">Lançar nota para algum aluno</b-button>
+            </b-col>
+        </b-row>
+        <b-row class="py-3">
             <b-col cols="6" md="4" lg="3" xl="2" v-for="aluno in alunos">
                 <app-box-usuario :usuario="aluno" @clickBox="relatorioAluno"/>
             </b-col>
         </b-row>
     </div>
-    <app-relatorio-usuario v-if="aluno" :aluno="aluno" :avaliacoes="avaliacoes" @removerSelecao="removerSelecao"/>
+    <app-relatorio-usuario v-if="aluno" :aluno="aluno" :projeto="projeto_id" @removerSelecao="removerSelecao"/>
+    <app-lancar-nota v-if="lancarNota" :alunos="alunos" @removerSelecao="() => lancarNota = false"/>
 </div>

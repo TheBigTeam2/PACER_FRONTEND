@@ -1,0 +1,35 @@
+<b-modal :visible="true" title="Lançar nota" @hidden="$emit('removerSelecao')" size="xl" hide-footer>
+    <b-form @submit="lancarNota">
+        <b-form-group id="input-group-sprint" label="Sprint:" label-for="input-sprint">
+            <b-form-select
+                id="input-sprint"
+                v-model="form.sprint"
+                :options="sprints"
+                required/>
+        </b-form-group>
+
+        <b-form-group id="input-group-sprint" label="Sprint:" label-for="input-sprint">
+            <b-form-select
+                id="input-sprint"
+                v-model="form.aluno"
+                :options="alunosOptions"
+                required/>
+        </b-form-group>
+
+        <b-form-group
+            v-for="campo in form.notas"
+            id="input-group-1"
+            :label="criterios[campo.criterio]"
+            :label-for="'input-' + criterios[campo.criterio]">
+            <b-form-input
+                :id="'input-' + criterios[campo.criterio]"
+                v-model="campo.nota"
+                type="number"
+                min="0"
+                max="3"
+                required/>
+        </b-form-group>
+
+        <b-button type="submit" variant="success">Lançar</b-button>
+    </b-form>
+</b-modal>

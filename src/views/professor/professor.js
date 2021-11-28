@@ -1,8 +1,14 @@
+import { mapState } from 'vuex'
 import AppHeader from '../../components/header/header.vue'
 
 export default {
   components: {
     'app-header': AppHeader
+  },
+  computed: {
+    ...mapState({
+      usuario: state => state.usuario
+    })
   },
   data: () => ({
     actions: [{
@@ -23,5 +29,14 @@ export default {
       route: '/professor/equipes'
     }
     ]
-  })
+  }),
+  created () {
+    if (this.usuario.usu_auth === 'Administrador') {
+      this.actions.unshift({
+        icon: 'nav-icon fas fa-user',
+        text: 'Usuário',
+        route: '/admin/usuario'
+      })
+    }
+  }
 }
