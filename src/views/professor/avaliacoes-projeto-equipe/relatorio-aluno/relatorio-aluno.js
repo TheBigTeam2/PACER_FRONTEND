@@ -7,10 +7,17 @@ export default {
         'app-radar': radar
     },
     data: () => ({
-        relatorios: null
+        relatorios: null,
+        avaliacoes: null,
+        fields: ['avaliador', 'sprint', 'criterio', 'nota']
     }),
     methods: {
         buscarRelatorio () {
+            professorService
+                .buscarTabelaRelatorio(this.projeto, this.aluno.usu_id)
+                .then(res => res.data)
+                .then(avaliacoes => this.avaliacoes = avaliacoes)
+
             professorService
                 .buscarRelatorio(this.projeto, this.aluno.usu_id)
                 .then(res => res.data)

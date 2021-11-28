@@ -96,6 +96,10 @@ class ProfessorService {
   lancarNota (dados) {
     return api.post('/avaliacao_prof', dados)
   }
+
+  buscarTabelaRelatorio (projeto, aluno) {
+    return api.get('/avaliacoes_do_usuario?projeto=' + projeto + '&avaliado=' + aluno)
+  }
 }
 
 export default new ProfessorService()

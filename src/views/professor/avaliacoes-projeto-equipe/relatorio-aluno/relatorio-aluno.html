@@ -4,4 +4,7 @@
             <app-radar :data="relatorio.data" :options="relatorio.options" :i="i"/>
         </b-col>
     </b-row>
+    <b-row v-if="avaliacoes" class="mt-4 px-2">
+        <b-table striped hover :items="avaliacoes" :fields="fields"></b-table>
+    </b-row>
 </b-modal>
