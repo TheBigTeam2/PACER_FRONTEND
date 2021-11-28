@@ -25,8 +25,7 @@ export default {
                     .buscarProjetos()
                     .then(res => res.data)
                     .then(projetos => resolve(projetos.filter(projeto => {
-                        console.log(this.equipe)
-                        return projeto.pro_disciplinas.filter(disciplina => {
+                        return projeto.disciplinas.filter(disciplina => {
                             return disciplina.dis_id === this.equipe.equ_disciplina.dis_id
                         }).length >= 1
                     })))
@@ -49,7 +48,6 @@ export default {
                     ...projetoT,
                     incluso: inclusos.filter(projetoI => projetoT.pro_id == projetoI.pro_id).length == 1
                 }))
-                console.log(this.projetos)
             })
         },
         adicionarEquipeProjeto(remover, idProjeto) {
