@@ -11,7 +11,7 @@
                     <b-list-group-item>Término: {{projeto.pro_termino | moment('DD/MM/YYYY')}}</b-list-group-item>
                     <b-list-group-item>Disciplinas
                         <b-list-group class="mt-2">
-                            <b-list-group-item v-for="disciplina in projeto.pro_disciplinas">{{disciplina.dis_nome}}</b-list-group-item>
+                            <b-list-group-item v-for="disciplina in projeto.disciplinas">{{disciplina.dis_nome}}</b-list-group-item>
                         </b-list-group>
                     </b-list-group-item>
                     <b-list-group-item>Equipe

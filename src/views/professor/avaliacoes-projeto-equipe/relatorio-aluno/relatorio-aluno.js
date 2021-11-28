@@ -36,8 +36,15 @@ export default {
                                 {
                                     label: 'Other',
                                     data: relatorio.radar_2.map(() => 0),
-                                    borderColor: '#FFF',
-                                    backgroundColor: '#FFF',
+                                    borderColor: 'transparent',
+                                    backgroundColor: 'transparent',
+                                    fill: true
+                                },
+                                {
+                                    label: 'Other',
+                                    data: relatorio.radar_2.map(() => 3),
+                                    borderColor: 'transparent',
+                                    backgroundColor: 'transparent',
                                     fill: true
                                 }
                             ]
