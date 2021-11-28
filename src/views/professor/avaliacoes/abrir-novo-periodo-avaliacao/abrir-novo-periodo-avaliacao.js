@@ -66,7 +66,7 @@ export default {
         ProfessorService
           .buscarProjetos()
           .then(res => res.data)
-          .then(projetos => resolve(projetos.filter(projeto => projeto.pro_disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1)))
+          .then(projetos => resolve(projetos.filter(projeto => projeto.disciplinas.filter(disciplina => disciplina.dis_professor === this.usuario.usu_id).length >= 1)))
       })
     },
     buscarDisciplinas() {
@@ -86,7 +86,7 @@ export default {
           let projetos = res[1]
           this.projetos = projetos.filter(projeto => {
             return disciplinas.filter(disciplina => {
-              return projeto.pro_disciplinas.filter(pd => pd.dis_id === disciplina.dis_id).length !== 0
+              return projeto.disciplinas.filter(pd => pd.dis_id === disciplina.dis_id).length !== 0
             }).length !== 0
           }).map(projeto => ({
             text: projeto.pro_tema,
