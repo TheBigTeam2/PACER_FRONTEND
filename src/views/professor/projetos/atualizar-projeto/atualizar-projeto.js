@@ -70,7 +70,7 @@ export default {
             pro_tema: this.$props.projeto.pro_tema,
             pro_inicio: this.$moment(this.$props.projeto.pro_inicio).format('YYYY-MM-DD'),
             pro_termino: this.$moment(this.$props.projeto.pro_termino).format('YYYY-MM-DD'),
-            disciplinas: this.$props.projeto.pro_disciplinas.map(disciplina => this.formatarDisciplina(disciplina))
+            disciplinas: this.$props.projeto.disciplinas.map(disciplina => this.formatarDisciplina(disciplina))
         }
     }
 }
